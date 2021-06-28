@@ -1,0 +1,104 @@
+# XDG
+# NOTE: The XDG subdirectories need to exist, so we ensure that they do:
+mkdir -p $XDG_CACHE_HOME/zsh $XDG_STATE_HOME/zsh
+
+compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
+zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zsh/zcompcache
+export HISTFILE="$XDG_STATE_HOME"/zsh/history
+
+# Completions:
+unsetopt list_ambiguous  # ``find -ex<TAB>`` will complete up to 'exec', but
+                         # also list the other completions (``-execdir``, in
+                         # this case)
+
+# Editor:
+export EDITOR="emacsclient -c -a ''"
+export VISUAL=$EDITOR
+
+# History:
+
+HISTSIZE=10000
+SAVEHIST=10000
+setopt extended_history   # Adds extra info to history (esp. timestamps)
+setopt histverify         # History substitutions placed on cli for editing,
+                          # not run automatically.
+setopt inc_append_history # History incrementally appended to file, as opposed
+                          # to appending on shell exit (setopt append_history),
+                          # or clobbering the history file (neither option set,
+                          # and a common issue with bash). History also shared
+                          # across sessions.
+setopt share_history      # Hurrah!
+bindkey ' ' magic-space   # Enable 'magic space', which will automatically
+                          # perform history substitution when spacebar is
+                          # pressed.
+
+setopt hist_ignore_dups   # Consecutive duplicate lines not saved (use setopt
+                          # hist_ignore_all_dups to remove all previous
+                          # duplicate lines, as opposed to consecutive ones).
+setopt hist_find_no_dups  # When searching backwards through history, encounter
+                          # each different command once, even if repeated
+                          # multiple times
+setopt hist_ignore_space  # Lines preceded by ' ' not stored in history
+setopt hist_reduce_blanks # Remove extraneous whitespace when storing history
+
+# Keybindings:
+
+autoload -Uz edit-command-line
+zle -N edit-command-line
+
+bindkey -M vicmd 'v' edit-command-line
+bindkey -M viins "\C-a" beginning-of-line
+bindkey -M viins "\C-b" backward-char
+bindkey -M viins "\C-d" delete-char
+bindkey -M viins "\C-e" end-of-line
+bindkey -M viins "\C-f" forward-char
+bindkey -M viins "\C-k" kill-line
+bindkey -M viins "\C-n" down-line-or-history
+bindkey -M viins "\C-p" up-line-or-history
+bindkey -M viins "\C-o" accept-line-and-down-history
+bindkey -M viins "\C-w" backward-kill-word
+bindkey -M viins "\e[A" history-beginning-search-backward
+bindkey -M viins "\e[B" history-beginning-search-forward
+bindkey -M viins "\C-h" backward-delete-char
+bindkey -M viins "\C-r" history-incremental-search-backward
+bindkey -M viins "\C-s" history-incremental-search-forward
+
+bindkey -M viins "\C-u" undo
+
+# Basically essential: by default, backspace is bound to
+# vi-backward-delete-char, which is awful and non-intuitive: "If in insert mode
+# this won't delete past the point where insert mode was last entered." -
+# http://www.cs.elte.hu/zsh-manual/zsh_14.html#SEC45
+bindkey -M viins '^?' backward-delete-char
+
+# Integrate this, somehow?
+# bindkey -M emacs '\ee' edit-command-line
+bindkey -M viins "\C-x\C-e" edit-command-line
+
+set -o vi
+
+KEYTIMEOUT=10  # Default: 40, set lower to reduce escape key delay
+
+# Additional Programs:
+eval "$(zoxide init zsh)"
+source ${HOME}/.config/broot/launcher/bash/br
+
+# Functions:
+
+body() {
+    IFS= read -r header
+    printf '%s\n' "$header"
+    "$@"
+}
+
+prepend_to_path () {
+    path=( $1 $path )
+}
+
+# Prompt:
+export STARSHIP_CONFIG=~/.config/starship/zsh.toml
+eval "$(starship init zsh)"
+
+if [[ -r $HOME/.zshrc.local ]]; then
+  source $HOME/.zshrc.local
+fi
