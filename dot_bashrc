@@ -3,3 +3,9 @@ export STARSHIP_CONFIG=~/.config/starship/bash.toml
 eval "$(starship init bash)"
 
 source $HOME/.shell_common
+
+# fzf:
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# direnv:
+eval "$(direnv hook bash)"

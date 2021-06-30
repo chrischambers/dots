@@ -40,22 +40,42 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 
+# Better Path:
+# ----------------------------------------------------------------------
+prepend_to_path "/usr/local/sbin"
+prepend_to_path "$HOME/bin"
+
+# The following 2 sections do introduce some overhead - particularly virtualenv
+# configuration, although pyenv does too.
 # Pyenv Setup:
 # ----------------------------------------------------------------------
-export PYENV_ROOT="${HOME}/.pyenv"
+export PYENV_ROOT="$HOME/.pyenv"
 prepend_to_path "${PYENV_ROOT}/bin"
-prepend_to_path "/usr/loca/sbin"
 eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
+
+# Fix issue with =brew doctor= warning about pyenv-related issues- see:
+# https://github.com/pyenv/pyenv/issues/106
+alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
 
 # Virtualenv (with Pyenv) Setup:
 # ----------------------------------------------------------------------
 export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 export WORKON_HOME=$HOME/.virtualenvs
-# pyenv virtualenvwrapper_lazy
-pyenv virtualenvwrapper
+# lazy variant is slightly more performant:
+# pyenv virtualenvwrapper
+pyenv virtualenvwrapper_lazy
 
 # Shared Utilities:
 # ----------------------------------------------------------------------
-eval "$(zoxide init zsh)"
+# Broot:
 source ${HOME}/.config/broot/launcher/bash/br
+
+# Haskell:
+[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
+
+# Rust:
+[ -f "$HOME/.ghcup/env" ] && source "$HOME/.cargo/env"
+
+# Zoxide:
+eval "$(zoxide init zsh)"
