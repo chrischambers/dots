@@ -66,6 +66,10 @@ export WORKON_HOME=$HOME/.virtualenvs
 # pyenv virtualenvwrapper
 pyenv virtualenvwrapper_lazy
 
+# Python Aliases:
+alias show_site_packages='python -c "from distutils.sysconfig import get_python_lib; print get_python_lib()"'
+alias delpyc='find ./ -type f -name "*.pyc" -exec rm -f {} \;'
+
 # Shared Utilities:
 # ----------------------------------------------------------------------
 # Broot:
