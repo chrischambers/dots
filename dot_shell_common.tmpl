@@ -45,6 +45,33 @@ export XDG_STATE_HOME="$HOME/.local/state"
 prepend_to_path "/usr/local/sbin"
 prepend_to_path "$HOME/bin"
 
+# Aliases:
+# ----------------------------------------------------------------------
+alias h='history | tail -n 10'    # previous 10 history lines, for context
+alias tree='tree -FC'             # colorise and use symbolic key for filetypes
+{{- if (eq .chezmoi.os "darwin") }}
+alias finder='open /System/Library/CoreServices/Finder.app/'
+{{- end }}
+
+# ls / lsd:
+if command -v lsd > /dev/null
+then
+    alias ls="lsd -F"
+    alias l="lsd -AlF"
+else
+    if ls --color -d . >/dev/null 2>&1; then
+	alias ls='ls -F --color=auto'   # colorise and use symbolic key for filetypes
+	alias l="ls -AlhF --color=auto" # colorised, symbolic key, long listing w/
+					# hidden files and human-readable file sizes.
+    elif ls -G -d . >/dev/null 2>&1; then
+	alias ls='ls -FG'               # colorise and use symbolic key for filetypes
+	alias l="ls -AlhFG"             # colorised, symbolic key, long listing w/
+					# hidden files and human-readable file sizes.
+    fi
+fi
+
+# Python:
+# ----------------------------------------------------------------------
 # The following 2 sections do introduce some overhead - particularly virtualenv
 # configuration, although pyenv does too.
 # Pyenv Setup:
@@ -71,41 +98,23 @@ pyenv virtualenvwrapper_lazy
 alias show_site_packages='python -c "from distutils.sysconfig import get_python_lib; print get_python_lib()"'
 alias delpyc='find ./ -type f -name "*.pyc" -exec rm -f {} \;'
 
-# Aliases:
+# Other Programming Language Configuration:
 # ----------------------------------------------------------------------
-alias h='history | tail -n 10'    # previous 10 history lines, for context
-alias tree='tree -FC'             # colorise and use symbolic key for filetypes
-{{- if (eq .chezmoi.os "darwin") }}
-alias finder='open /System/Library/CoreServices/Finder.app/'
-{{- end }}
 
-# ls / lsd:
-if command -v lsd > /dev/null
-then
-    alias ls="lsd -F"
-    alias l="lsd -AlF"
-else
-    if ls --color -d . >/dev/null 2>&1; then
-	alias ls='ls -F --color=auto'   # colorise and use symbolic key for filetypes
-	alias l="ls -AlhF --color=auto" # colorised, symbolic key, long listing w/
-					# hidden files and human-readable file sizes.
-    elif ls -G -d . >/dev/null 2>&1; then
-	alias ls='ls -FG'               # colorise and use symbolic key for filetypes
-	alias l="ls -AlhFG"             # colorised, symbolic key, long listing w/
-					# hidden files and human-readable file sizes.
-    fi
-fi
+# Haskell:
+[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
+
+# Ruby:
+eval "$(rbenv init -)"
+
+# Rust:
+[ -f "$HOME/.ghcup/env" ] && source "$HOME/.cargo/env"
+
 
 # Shared Utilities:
 # ----------------------------------------------------------------------
 # Broot:
 source ${HOME}/.config/broot/launcher/bash/br
-
-# Haskell:
-[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
-
-# Rust:
-[ -f "$HOME/.ghcup/env" ] && source "$HOME/.cargo/env"
 
 # Zoxide:
 eval "$(zoxide init zsh)"
