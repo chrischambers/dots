@@ -1,14 +1,53 @@
-prepend_to_path () {
-    path=( $1 $path )
+# Common Functions:
+# ----------------------------------------------------------------------
+# POSIX-compliant path manipulation without inserting duplicates.
+# Source: https://stackoverflow.com/questions/135754/how-to-keep-from-duplicating-path-variable-in-csh#answer-5048977
+prepend_to_path() {
+    local SAVED_IFS="$IFS"
+    local dir
+    IFS=:
+    for dir in $1 ; do
+	if ! $( echo "$PATH" | tr ":" "\n" | grep -qx "$dir" ) ; then
+	    PATH=$dir:$PATH
+	fi
+    done
+    IFS="$SAVED_IFS"
 }
 
+append_to_path() {
+    local SAVED_IFS="$IFS"
+    local dir
+    IFS=:
+    for dir in $1 ; do
+	if ! $( echo "$PATH" | tr ":" "\n" | grep -qx "$dir" ) ; then
+	    PATH=$PATH:$dir
+	fi
+    done
+    IFS="$SAVED_IFS"
+}
+
+body() {
+    IFS= read -r header
+    printf '%s\n' "$header"
+    "$@"
+}
+
+# Pyenv Setup:
+# ----------------------------------------------------------------------
 export PYENV_ROOT="${HOME}/.pyenv"
 prepend_to_path "${PYENV_ROOT}/bin"
 prepend_to_path "/usr/loca/sbin"
 eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 
+# Virtualenv (with Pyenv) Setup:
+# ----------------------------------------------------------------------
 export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 export WORKON_HOME=$HOME/.virtualenvs
 # pyenv virtualenvwrapper_lazy
 pyenv virtualenvwrapper
+
+# Shared Utilities:
+# ----------------------------------------------------------------------
+eval "$(zoxide init zsh)"
+source ${HOME}/.config/broot/launcher/bash/br

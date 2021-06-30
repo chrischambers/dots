@@ -79,22 +79,6 @@ set -o vi
 
 KEYTIMEOUT=10  # Default: 40, set lower to reduce escape key delay
 
-# Additional Programs:
-eval "$(zoxide init zsh)"
-source ${HOME}/.config/broot/launcher/bash/br
-
-# Functions:
-
-body() {
-    IFS= read -r header
-    printf '%s\n' "$header"
-    "$@"
-}
-
-prepend_to_path () {
-    path=( $1 $path )
-}
-
 # Prompt:
 export STARSHIP_CONFIG=~/.config/starship/zsh.toml
 eval "$(starship init zsh)"
