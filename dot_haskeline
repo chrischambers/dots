@@ -1,0 +1,4 @@
+historyDuplicates: IgnoreConsecutive
+completionPromptLimit: Just 250
+editMode: Vi
+
