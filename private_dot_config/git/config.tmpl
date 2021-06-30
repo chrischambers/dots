@@ -32,6 +32,7 @@
         br = branch
         cp = cherry-pick
         ds = diff --staged
+	di = diff --find-copies-harder # required for git-divergence
 
         showremote = !sh -c 'git for-each-ref --format=\"%(upstream:short)\" $(git rev-parse --symbolic-full-name --default HEAD $1)' -
         # "showremote" has two usages:
