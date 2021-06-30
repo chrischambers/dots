@@ -1,3 +1,5 @@
+source $HOME/.shell_common
+
 # XDG
 # NOTE: The XDG subdirectories need to exist, so we ensure that they do:
 mkdir -p $XDG_CACHE_HOME/zsh $XDG_STATE_HOME/zsh
@@ -82,8 +84,6 @@ KEYTIMEOUT=10  # Default: 40, set lower to reduce escape key delay
 # Prompt:
 export STARSHIP_CONFIG=~/.config/starship/zsh.toml
 eval "$(starship init zsh)"
-
-source $HOME/.shell_common
 
 if [[ -r $HOME/.zshrc.local ]]; then
   source $HOME/.zshrc.local
