@@ -99,6 +99,8 @@ prepend_to_path () {
 export STARSHIP_CONFIG=~/.config/starship/zsh.toml
 eval "$(starship init zsh)"
 
+source $HOME/.shell_common
+
 if [[ -r $HOME/.zshrc.local ]]; then
   source $HOME/.zshrc.local
 fi

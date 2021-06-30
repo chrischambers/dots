@@ -1,0 +1,14 @@
+prepend_to_path () {
+    path=( $1 $path )
+}
+
+export PYENV_ROOT="${HOME}/.pyenv"
+prepend_to_path "${PYENV_ROOT}/bin"
+prepend_to_path "/usr/loca/sbin"
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+
+export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
+export WORKON_HOME=$HOME/.virtualenvs
+# pyenv virtualenvwrapper_lazy
+pyenv virtualenvwrapper
