@@ -42,6 +42,11 @@ export XDG_STATE_HOME="$HOME/.local/state"
 
 # Better Path:
 # ----------------------------------------------------------------------
+{{ if eq .chezmoi.os "darwin" -}}
+# Update environment with homebrew information/path modifications:
+eval "$(brew shellenv)"
+{{- end }}
+
 prepend_to_path "/usr/local/sbin"
 prepend_to_path "$HOME/bin"
 
