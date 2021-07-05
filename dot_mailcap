@@ -1,0 +1,11 @@
+# Doesn't work:
+# -------------
+# text/html; firefox '%s' & sleep 3; description=HTML Text; test=test -n "$DISPLAY";  nametemplate=%s.html
+# text/html; firefox '%s' & sleep 3; description=HTML Text; test=test -n "$DISPLAY";  copiousoutput
+# text/html; firefox -private-window %s;copiousoutput
+# text/html; /Applications/Firefox\ Developer\ Edition.app/Contents/MacOS/firefox -private-window %s;copiousoutput
+
+# Works:
+# ------
+# text/html; /Applications/Firefox\ Developer\ Edition.app/Contents/MacOS/firefox -private-window %s
+text/html; open -a '/Applications/Brave Browser.app' %s
