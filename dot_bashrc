@@ -9,3 +9,9 @@ eval "$(starship init bash)"
 
 # direnv:
 eval "$(direnv hook bash)"
+
+# History:
+export HISTFILE="$XDG_STATE_HOME"/bash/history
+hgrep() {
+   history | grep "$@"
+}

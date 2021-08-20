@@ -6,7 +6,6 @@ mkdir -p $XDG_CACHE_HOME/zsh $XDG_STATE_HOME/zsh
 
 compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
 zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zsh/zcompcache
-export HISTFILE="$XDG_STATE_HOME"/zsh/history
 
 # Completions:
 unsetopt list_ambiguous  # ``find -ex<TAB>`` will complete up to 'exec', but
@@ -19,6 +18,7 @@ export VISUAL=$EDITOR
 
 # History:
 
+export HISTFILE="$XDG_STATE_HOME"/zsh/history
 HISTSIZE=10000
 SAVEHIST=10000
 setopt extended_history   # Adds extra info to history (esp. timestamps)
@@ -42,6 +42,10 @@ setopt hist_find_no_dups  # When searching backwards through history, encounter
                           # multiple times
 setopt hist_ignore_space  # Lines preceded by ' ' not stored in history
 setopt hist_reduce_blanks # Remove extraneous whitespace when storing history
+
+hgrep() {
+    history 1 | grep "$@"
+}
 
 # Keybindings:
 
