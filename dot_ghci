@@ -1,1 +1,10 @@
+-- Lambda Prompt:
 :set prompt "\ESC[1;34m%s\n\ESC[0;34mλ> \ESC[m"
+
+-- Better errors:
+:set -ferror-spans -freverse-errors -fprint-expanded-synonyms
+
+-- Prettier Printing:
+-- :set -ignore-package pretty-simple -package pretty-simple
+-- :def! pretty \ _ -> pure ":set -interactive-print Text.Pretty.Simple.pPrint"
+-- :pretty
