@@ -1,0 +1,99 @@
+# Global Options:
+# ----------------------------------------------------------------------
+SyncState *
+CopyArrivalDate yes
+
+# Gmail:
+# ----------------------------------------------------------------------
+
+IMAPAccount gmail
+Host imap.gmail.com
+User magma.chambers@gmail.com
+PassCmd "pass gmail"
+SSLType IMAPS
+AuthMechs LOGIN
+
+IMAPStore gmail-remote
+Account gmail
+
+MaildirStore gmail-local
+Subfolders Verbatim
+Path ~/Mail/gmail/
+Inbox ~/Mail/gmail/Inbox
+
+# Channel gmail-rest
+# Far :gmail-remote:
+# Near :gmail-local:
+# Create Both
+# # Expunge Both
+# Patterns * !"[Google Mail]/All Mail" !"[Google Mail]/Bin" !"[Google Mail]/Drafts" !"[Google Mail]/Important" !"[Google Mail]/Sent Mail" !"[Google Mail]/Spam" !"[Google Mail]/Starred"
+
+Channel gmail-all-mail
+Far :gmail-remote:"[Google Mail]/All Mail"
+Near :gmail-local:All
+Create Near
+
+Channel gmail-bin
+Far :gmail-remote:"[Google Mail]/Bin"
+Near :gmail-local:Trash
+Create Near
+
+Channel gmail-drafts
+Far :gmail-remote:"[Google Mail]/Drafts"
+Near :gmail-local:Drafts
+Create Near
+
+Channel gmail-important
+Far :gmail-remote:"[Google Mail]/Important"
+Near :gmail-local:Important
+Create Near
+
+Channel gmail-sent-mail
+Far :gmail-remote:"[Google Mail]/Sent Mail"
+Near :gmail-local:Sent
+Create Near
+
+Channel gmail-spam
+Far :gmail-remote:"[Google Mail]/Spam"
+Near :gmail-local:Spam
+Create Near
+
+Channel gmail-starred
+Far :gmail-remote:"[Google Mail]/Starred"
+Near :gmail-local:Starred
+Create Near
+
+Group gmail
+Channel gmail-all-mail
+Channel gmail-bin
+Channel gmail-drafts
+Channel gmail-important
+Channel gmail-sent-mail
+Channel gmail-spam
+Channel gmail-starred
+
+# Runbox:
+# ----------------------------------------------------------------------
+
+IMAPAccount runbox
+Host mail.runbox.com
+User chris.chambers
+PassCmd "pass runbox"
+SSLType IMAPS
+
+IMAPStore runbox-remote
+Account runbox
+
+MaildirStore runbox-local
+Subfolders Verbatim
+# The trailing "/" is important
+Path ~/Mail/runbox/
+Inbox ~/Mail/runbox/Inbox
+
+Channel runbox
+Far :runbox-remote:
+Near :runbox-local:
+Create Both
+# Expunge Both
+# Include everything
+Patterns *
