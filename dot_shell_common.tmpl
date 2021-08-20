@@ -115,6 +115,10 @@ eval "$(rbenv init -)"
 # Rust:
 [ -f "$HOME/.ghcup/env" ] && source "$HOME/.cargo/env"
 
+# Clojure:
+# Silence "OpenJDK 64-Bit Server VM warning: Options -Xverify:none and -noverify were deprecated in JDK 13 and will likely be removed in a future release"
+# Source: https://stackoverflow.com/questions/61211695/openjdk-64-bit-server-vm-warning-options-xverifynone-and-noverify-were-depre
+export LEIN_JVM_OPTS="-XX:TieredStopAtLevel=1"
 
 # Shared Utilities:
 # ----------------------------------------------------------------------
