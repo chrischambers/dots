@@ -21,17 +21,11 @@ Subfolders Verbatim
 Path ~/Mail/gmail/
 Inbox ~/Mail/gmail/Inbox
 
-# Channel gmail-rest
-# Far :gmail-remote:
-# Near :gmail-local:
-# Create Both
-# # Expunge Both
-# Patterns * !"[Google Mail]/All Mail" !"[Google Mail]/Bin" !"[Google Mail]/Drafts" !"[Google Mail]/Important" !"[Google Mail]/Sent Mail" !"[Google Mail]/Spam" !"[Google Mail]/Starred"
-
 Channel gmail-all-mail
-Far :gmail-remote:"[Google Mail]/All Mail"
+Far :gmail-remote:
 Near :gmail-local:All
 Create Near
+Patterns * !"[Google Mail]/All mail" !"[Google Mail]/All Mail" !"[Google Mail]/Bin" !"[Google Mail]/Drafts" !"[Google Mail]/Important" !"[Google Mail]/Sent Mail" !"[Google Mail]/Spam" !"[Google Mail]/Starred"
 
 Channel gmail-bin
 Far :gmail-remote:"[Google Mail]/Bin"
