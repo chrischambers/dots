@@ -75,6 +75,12 @@ else
     fi
 fi
 
+# LaTeX dvipng (if installed)
+# ----------------------------------------------------------------------
+# Note that path_helper must preceed any shims to work properly:
+[ -f "/usr/libexec/path_helper" ] && eval "$(/usr/libexec/path_helper)"
+# ----------------------------------------------------------------------
+
 # Python:
 # ----------------------------------------------------------------------
 # The following 2 sections do introduce some overhead - particularly virtualenv
