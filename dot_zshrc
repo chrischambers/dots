@@ -4,6 +4,7 @@ source $HOME/.shell_common
 # NOTE: The XDG subdirectories need to exist, so we ensure that they do:
 mkdir -p $XDG_CACHE_HOME/zsh $XDG_STATE_HOME/zsh
 
+autoload -Uz compinit
 compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
 zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zsh/zcompcache
 
