@@ -150,15 +150,18 @@ if-shell 'test "$(uname)" = "Linux"' 'source ~/.tmux.conf.linux'
 set -g prefix '\'
 bind '\' send-prefix
 
+set-option -s set-clipboard off
 # bind b run "tmux save-buffer - | xclip -i -selection clipboard" \; display-message "Copied to system clipboard"
 
-# Setup 'v' to begin selection as in Vim
-bind -t vi-copy v begin-selection
+# Setup 'v' to begin selection as in Vim:
+bind-key -T copy-mode-vi v send-keys -X begin-selection
 
-# Update 'y' and default binding of `Enter` to use copy-pipe
-unbind -t vi-copy Enter
-# bind -t vi-copy Enter copy-pipe "xclip -selection clipboard"
-# bind -t vi-copy y copy-pipe "xclip -selection clipboard"
-#
-bind -t vi-copy y copy-pipe "xclip -sel clip -i"
+# 'y' Toggles between rectangle-selection and normal selection:
+bind-key -T copy-mode-vi y send-keys -X rectangle-toggle
+
+# Use mouse-drag / Enter to copy, <prefix>P to paste:
+unbind -T copy-mode-vi Enter
+bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel 'xclip -selection clipboard -i'
+bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel 'xclip -selection clipboard -i'
+bind P paste-buffer
 {{- end }}
