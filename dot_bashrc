@@ -15,3 +15,6 @@ export HISTFILE="$XDG_STATE_HOME"/bash/history
 hgrep() {
    history | grep "$@"
 }
+
+# broot:
+source $HOME/.config/broot/launcher/bash/br
