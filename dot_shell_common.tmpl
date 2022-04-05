@@ -1,6 +1,6 @@
 # Common Functions:
 # ----------------------------------------------------------------------
-# POSIX-compliant path manipulation without inserting duplicates.
+# POSIX-compliant path manipulation without inserting duplicates.
 # Source: https://stackoverflow.com/questions/135754/how-to-keep-from-duplicating-path-variable-in-csh#answer-5048977
 prepend_to_path() {
     local SAVED_IFS="$IFS"
@@ -32,7 +32,7 @@ body() {
     "$@"
 }
 
-# Setup XDG Base Directories:
+# Setup XDG Base Directories:
 # https://wiki.archlinux.org/title/XDG_Base_Directory
 # ----------------------------------------------------------------------
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -40,7 +40,7 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 
-# Better Path:
+# Better Path:
 # ----------------------------------------------------------------------
 {{ if eq .chezmoi.os "darwin" -}}
 # Update environment with homebrew information/path modifications:
@@ -85,7 +85,7 @@ fi
 # ----------------------------------------------------------------------
 # The following 2 sections do introduce some overhead - particularly virtualenv
 # configuration, although pyenv does too.
-# Pyenv Setup:
+# Pyenv Setup:
 # ----------------------------------------------------------------------
 export PYENV_ROOT="$HOME/.pyenv"
 prepend_to_path "${PYENV_ROOT}/bin"
@@ -96,7 +96,7 @@ eval "$(pyenv init -)"
 # https://github.com/pyenv/pyenv/issues/106
 alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
 
-# Virtualenv (with Pyenv) Setup:
+# Virtualenv (with Pyenv) Setup:
 # ----------------------------------------------------------------------
 export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 export WORKON_HOME=$HOME/.virtualenvs
@@ -109,7 +109,7 @@ pyenv virtualenvwrapper_lazy
 alias show_site_packages='python -c "from distutils.sysconfig import get_python_lib; print get_python_lib()"'
 alias delpyc='find ./ -type f -name "*.pyc" -exec rm -f {} \;'
 
-# Other Programming Language Configuration:
+# Other Programming Language Configuration:
 # ----------------------------------------------------------------------
 
 # Haskell:
@@ -126,14 +126,14 @@ eval "$(rbenv init -)"
 # Source: https://stackoverflow.com/questions/61211695/openjdk-64-bit-server-vm-warning-options-xverifynone-and-noverify-were-depre
 export LEIN_JVM_OPTS="-XX:TieredStopAtLevel=1"
 
-# Shared Utilities:
+# Shared Utilities:
 # ----------------------------------------------------------------------
 # Zoxide:
 eval "$(zoxide init zsh)"
 
 {{- if (eq .chezmoi.os "darwin") }}
 
-# OSX Specific Configuration:
+# OSX Specific Configuration:
 # ----------------------------------------------------------------------
 
 # https://support.brave.com/hc/en-us/articles/360044860011-How-Do-I-Use-Command-Line-Flags-in-Brave-
