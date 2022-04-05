@@ -130,3 +130,15 @@ export LEIN_JVM_OPTS="-XX:TieredStopAtLevel=1"
 # ----------------------------------------------------------------------
 # Zoxide:
 eval "$(zoxide init zsh)"
+
+{{- if (eq .chezmoi.os "darwin") }}
+
+# OSX Specific Configuration:
+# ----------------------------------------------------------------------
+
+# https://support.brave.com/hc/en-us/articles/360044860011-How-Do-I-Use-Command-Line-Flags-in-Brave-
+function brave() {
+    # E.g. "brave --incognito"
+    open -a "Brave Browser.app" -n --args "$@"
+}
+{{- end }}
