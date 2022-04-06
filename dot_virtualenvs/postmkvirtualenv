@@ -15,8 +15,10 @@ pip install yapf
 pip install pydoc_utils
 pip install importmagic epc
 
+# lsp
+pip install 'python-language-server[all]'
 # For dap-mode debugging:
-pip install "ptvsd>=4.2"
+pip install debugpy
 
 # Essential:
 pip install ipython
