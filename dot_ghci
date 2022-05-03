@@ -1,5 +1,5 @@
 -- Lambda Prompt:
-:set prompt "\ESC[1;34m%s\n\ESC[0;34mλ> \ESC[m"
+:set prompt "λ> "
 
 -- Better errors:
 :set -ferror-spans -freverse-errors -fprint-expanded-synonyms
