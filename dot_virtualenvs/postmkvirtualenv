@@ -25,6 +25,8 @@ pip install debugpy
 
 # Essential:
 pip install ipython
+# required for ipython: sphinxify_docstring
+pip install docrepr
 
 # Nicer testing:
 pip install pytest
