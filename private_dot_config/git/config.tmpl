@@ -1,6 +1,8 @@
 [user]
         name = {{ .name | quote }}
         email = {{ .email | quote }}
+[init]
+	defaultBranch = master
 [color]
         branch = auto
         diff = auto
@@ -86,10 +88,10 @@
 
         tidy = rebase -i @{upstream}..
 [status]
-    submoduleSummary = true
+        submoduleSummary = true
 [diff]
-    submodule = log
+        submodule = log
 [fetch]
-    recurseSubmodules = on-demand
+        recurseSubmodules = on-demand
 [pull]
-    rebase = merges
+        rebase = merges
