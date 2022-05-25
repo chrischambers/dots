@@ -1,9 +1,6 @@
 #!/bin/zsh
 # This hook is sourced after a new virtualenv is activated.
 
-# required for ipython: sphinxify_docstring
-pip install docrepr
-
 # Style checking:
 pip install rope
 pip install flake8

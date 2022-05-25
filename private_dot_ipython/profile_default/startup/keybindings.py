@@ -7,6 +7,7 @@ from prompt_toolkit.enums import DEFAULT_BUFFER
 from prompt_toolkit.filters import HasFocus, ViInsertMode, ViNavigationMode
 from prompt_toolkit.key_binding.bindings.named_commands import get_by_name
 
+
 def apply_keybindings(registry):
 
     ph = get_by_name('previous-history')
