@@ -1,0 +1,7 @@
+[data]
+  name = "Chris Chambers"
+  email = "magma.chambers@gmail.com"
+  encryption = "gpg"
+
+[gpg]
+  symmetric = true
