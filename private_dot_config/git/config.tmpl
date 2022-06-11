@@ -9,8 +9,28 @@
         interactive = auto
         status = auto
 [core]
-        pager = less -FRSX
-        # Avoids using pager if output fits onscreen
+        # Avoids using pager if output fits onscreen:
+        # pager = less -FRSX
+        pager = delta
+[delta]
+        navigate = true  # use n and N to move between diff sections
+
+        # set to true if you're in a terminal w/ a light background color
+        # (e.g. the default macOS terminal):
+        light = false
+        side-by-side = true
+        syntax-theme = Dracula
+
+[interactive]
+        diffFilter = delta --color-only
+
+[merge]
+        conflictstyle = diff3
+
+[diff]
+        colorMoved = default
+        submodule = log
+
 [sendemail]
         smtpencryption = tls
         smtpserver = smtp.gmail.com
@@ -89,8 +109,6 @@
         tidy = rebase -i @{upstream}..
 [status]
         submoduleSummary = true
-[diff]
-        submodule = log
 [fetch]
         recurseSubmodules = on-demand
 [pull]
