@@ -115,6 +115,7 @@ alias delpyc='find ./ -type f -name "*.pyc" -exec rm -f {} \;'
 # ----------------------------------------------------------------------
 
 # Haskell:
+prepend_to_path "$HOME/.ghcup/bin"
 [ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
 
 # Ruby:
