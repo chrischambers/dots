@@ -102,3 +102,6 @@ eval "$(direnv hook zsh)"
 
 # broot:
 source $HOME/.config/broot/launcher/bash/br
+
+# Zoxide:
+eval "$(zoxide init zsh)"
