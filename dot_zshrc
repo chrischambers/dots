@@ -95,10 +95,71 @@ if [[ -r $HOME/.zshrc.local ]]; then
 fi
 
 # fzf:
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# You need to manually symlink the correct homebrew fzf/shell location to ~/.fzf
+# for the following to work:
+[[ -f ~/.fzf/completion.zsh ]] && source ~/.fzf/completion.zsh
+[[ -f ~/.fzf/key-bindings.zsh ]] && source ~/.fzf/key-bindings.zsh
+
+# -- Use fd instead of find --
+
+export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
+
+# For the `**` tab completion for files and directories:
+_fzf_compgen_path() {
+  fd --hidden --exclude .git . "$1"
+}
+
+# For the `**` tab completion for directories only (e.g. `cd **`:
+_fzf_compgen_dir() {
+  fd --type=d --hidden --exclude .git . "$1"
+}
+
+# ------------------------------------------------------------------------------
+# Enable fzf-git integration:
+# Source: <https://www.josean.com/posts/7-amazing-cli-tools>
+source ~/src/fzf-git/fzf-git.sh
+
+# Note that keybinds need to be done quite quickly because of the KEYTIMEOUT value.
+
+# - C-G, C-F :: Files
+# - C-G, C-B :: Branches
+# - C-G, C-T :: Tags
+# - C-G, C-R :: Remotes
+# - C-G, C-H :: commit Hashes
+# - C-G, C-S :: Stashes
+# - C-G, C-L :: reflogs
+# - C-G, C-W :: Worktrees
+# - C-G, C-E :: Each ref (git for-each-ref)
+
+# TAB or SHIFT-TAB to select multiple objects
+# CTRL-/ to change preview window layout
+# CTRL-O to open the object in the web browser (in GitHub URL scheme)
+# ------------------------------------------------------------------------------
+show_file_or_dir_preview="if [ -d {} ]; then lsd --tree --depth 2 --color=always --icon=always {} | head -200; else bat -n --color=always --line-range :500 {}; fi"
+export FZF_CTRL_T_OPTS="--preview '$show_file_or_dir_preview'"
+export FZF_ALT_C_OPTS="--preview 'lsd --tree --depth 2 --color=always --icon=always {} | head -200'"
+
+# Advanced customization of fzf options via _fzf_comprun function
+# - The first argument to the function is the name of the command.
+# - You should make sure to pass the rest of the arguments to fzf.
+_fzf_comprun() {
+  local command=$1
+  shift
+
+  case "$command" in
+    cd)           fzf --preview 'lsd --tree --depth 2 --color=always --icon=always {} | head -200' "$@" ;;
+    export|unset) fzf --preview "eval 'echo $'{}"                                                  "$@" ;;
+    ssh)          fzf --preview 'dig {}'                                                           "$@" ;;
+    *)            fzf --preview "$show_file_or_dir_preview"                                        "$@" ;;
+  esac
+}
 
 # direnv:
 eval "$(direnv hook zsh)"
 
 # Zoxide:
 eval "$(zoxide init zsh)"
+# Test this out:
+alias cd="z"
