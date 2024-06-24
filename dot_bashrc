@@ -16,8 +16,5 @@ hgrep() {
    history | grep "$@"
 }
 
-# broot:
-source $HOME/.config/broot/launcher/bash/br
-
 # Zoxide:
 eval "$(zoxide init bash)"
