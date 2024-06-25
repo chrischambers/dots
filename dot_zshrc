@@ -86,14 +86,6 @@ set -o vi
 
 KEYTIMEOUT=10  # Default: 40, set lower to reduce escape key delay
 
-# Prompt:
-export STARSHIP_CONFIG=~/.config/starship/zsh.toml
-eval "$(starship init zsh)"
-
-if [[ -r $HOME/.zshrc.local ]]; then
-  source $HOME/.zshrc.local
-fi
-
 # fzf:
 # You need to manually symlink the correct homebrew fzf/shell location to ~/.fzf
 # for the following to work:
@@ -163,3 +155,11 @@ eval "$(direnv hook zsh)"
 eval "$(zoxide init zsh)"
 # Test this out:
 alias cd="z"
+
+# Prompt:
+export STARSHIP_CONFIG=~/.config/starship/zsh.toml
+eval "$(starship init zsh)"
+
+if [[ -r $HOME/.zshrc.local ]]; then
+  source $HOME/.zshrc.local
+fi
