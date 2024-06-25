@@ -1,3 +1,5 @@
+# -*- mode: bash-ts -*-
+
 # Common Functions:
 # ----------------------------------------------------------------------
 # POSIX-compliant path manipulation without inserting duplicates.
@@ -40,8 +42,20 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 
+## OSX: path_helper
+## ----------------------------------------------------------------------
+## Note that path_helper must preceed any shims to work properly.
+## This may be needed for LaTeX dvipng:
+#{{- if (eq .chezmoi.os "darwin") }}
+#[ -f "/usr/libexec/path_helper" ] && eval "$(/usr/libexec/path_helper)"
+#{{- end }}
+## Further information: https://unix.stackexchange.com/questions/22979/path-helper-and-zsh
+## ----------------------------------------------------------------------
+
 # Better Path:
 # ----------------------------------------------------------------------
+prepend_to_path "/usr/local/sbin"
+
 {{ if eq .chezmoi.os "darwin" -}}
 # Update environment with homebrew information/path modifications:
 
@@ -49,7 +63,6 @@ prepend_to_path "/opt/homebrew/bin"
 eval "$(brew shellenv)"
 {{- end }}
 
-prepend_to_path "/usr/local/sbin"
 prepend_to_path "$HOME/bin"
 
 # Aliases:
@@ -76,12 +89,6 @@ else
 					# hidden files and human-readable file sizes.
     fi
 fi
-
-# LaTeX dvipng (if installed)
-# ----------------------------------------------------------------------
-# Note that path_helper must preceed any shims to work properly:
-[ -f "/usr/libexec/path_helper" ] && eval "$(/usr/libexec/path_helper)"
-# ----------------------------------------------------------------------
 
 # Python:
 # ----------------------------------------------------------------------
@@ -132,6 +139,13 @@ export LEIN_JVM_OPTS="-XX:TieredStopAtLevel=1"
 # Shared Utilities:
 # ----------------------------------------------------------------------
 
+# broot:
+source $HOME/.config/broot/launcher/bash/br
+
+# fzf theme:
+# Source: https://draculatheme.com/fzf
+export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
+
 {{- if (eq .chezmoi.os "darwin") }}
 
 # OSX Specific Configuration:
@@ -143,10 +157,3 @@ function brave() {
     open -a "Brave Browser.app" -n --args "$@"
 }
 {{- end }}
-
-# broot:
-source $HOME/.config/broot/launcher/bash/br
-
-# fzf theme:
-# Source: https://draculatheme.com/fzf
-export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
