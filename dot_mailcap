@@ -7,5 +7,5 @@
 
 # Works:
 # ------
-# text/html; /Applications/Firefox\ Developer\ Edition.app/Contents/MacOS/firefox -private-window %s
-text/html; open -a '/Applications/Brave Browser.app' %s
+text/html; /Applications/Firefox\ Developer\ Edition.app/Contents/MacOS/firefox -private-window %s
+# text/html; open -a '/Applications/Brave Browser.app' %s
