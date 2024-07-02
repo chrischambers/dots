@@ -15,10 +15,6 @@ unsetopt list_ambiguous  # ``find -ex<TAB>`` will complete up to 'exec', but
                          # also list the other completions (``-execdir``, in
                          # this case)
 
-# Editor:
-export EDITOR="emacsclient -c -a ''"
-export VISUAL=$EDITOR
-
 # History:
 
 export HISTFILE="$XDG_STATE_HOME"/zsh/history

@@ -90,6 +90,12 @@ else
     fi
 fi
 
+# Editor:
+# ----------------------------------------------------------------------
+alias e="emacsclient -c -a 'emacs'"
+export EDITOR="emacsclient -c -a 'emacs'"
+export VISUAL=$EDITOR
+
 # Python:
 # ----------------------------------------------------------------------
 # The following 2 sections do introduce some overhead - particularly virtualenv
