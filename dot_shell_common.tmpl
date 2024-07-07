@@ -96,29 +96,6 @@ alias e="emacsclient -c -a 'emacs'"
 export EDITOR="emacsclient -c -a 'emacs'"
 export VISUAL=$EDITOR
 
-# Python:
-# ----------------------------------------------------------------------
-# The following 2 sections do introduce some overhead - particularly virtualenv
-# configuration, although pyenv does too.
-# Pyenv Setup:
-# ----------------------------------------------------------------------
-export PYENV_ROOT="$HOME/.pyenv"
-prepend_to_path "${PYENV_ROOT}/bin"
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
-
-# Fix issue with =brew doctor= warning about pyenv-related issues- see:
-# https://github.com/pyenv/pyenv/issues/106
-alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
-
-# Virtualenv (with Pyenv) Setup:
-# ----------------------------------------------------------------------
-export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
-export WORKON_HOME=$HOME/.virtualenvs
-# lazy variant is slightly more performant:
-# pyenv virtualenvwrapper
-pyenv virtualenvwrapper_lazy
-
 # Python Aliases:
 # ----------------------------------------------------------------------
 alias show_site_packages='python -c "from distutils.sysconfig import get_python_lib; print get_python_lib()"'
@@ -130,9 +107,6 @@ alias delpyc='find ./ -type f -name "*.pyc" -exec rm -f {} \;'
 # Haskell:
 prepend_to_path "$HOME/.ghcup/bin"
 [ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
-
-# Ruby:
-eval "$(rbenv init -)"
 
 # Rust:
 [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
