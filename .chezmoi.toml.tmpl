@@ -1,0 +1,12 @@
+{{- $name := "Chris Chambers" -}}
+{{- $email := "magma.chambers@gmail.com" -}}
+{{- $gituser := "chrischambers" -}}
+
+[data]
+  name = {{ $name | quote }}
+  email = {{ $email | quote }}
+  encryption = "gpg"
+  gituser = {{ $gituser | quote  }}
+
+[gpg]
+  symmetric = true
