@@ -142,8 +142,6 @@ bind -n M-Up run "(tmux display-message -p '#{pane_current_command}' | grep -iqE
 bind -n M-Right run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim(diff)?$' && tmux send-keys C-l) || tmux select-pane -R"
 # bind -n C-/ run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim(diff)?$' && tmux send-keys 'C-\\') || tmux select-pane -l"
 
-if-shell 'test "$(uname)" = "Linux"' 'source ~/.tmux.conf.linux'
-
 {{- else if (eq .chezmoi.os "linux" ) }}
 # Linux Specific Configuration:
 # -----------------------------
