@@ -2,6 +2,7 @@
   name = "Chris Chambers"
   email = "magma.chambers@gmail.com"
   encryption = "gpg"
+  gituser = "chrischambers"
 
 [gpg]
   symmetric = true
