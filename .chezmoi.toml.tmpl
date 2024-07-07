@@ -1,6 +1,6 @@
-{{- $name := "Chris Chambers" -}}
-{{- $email := "magma.chambers@gmail.com" -}}
-{{- $gituser := "chrischambers" -}}
+{{- $name := promptStringOnce . "name" "Full name" "Chris Chambers" -}}
+{{- $email := promptStringOnce . "email" "Email Address" "magma.chambers@gmail.com" -}}
+{{- $gituser := promptStringOnce . "gituser" "Github/Gitlab username" "chrischambers" -}}
 
 [data]
   name = {{ $name | quote }}
