@@ -1,5 +1,8 @@
 {
   description = "My system configuration";
+  # Command to reload:
+
+  # darwin-rebuild switch --flake ~/.config/nix
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -12,6 +15,8 @@
   outputs = inputs@{ self, nix-darwin, nixpkgs }:
   let
     configuration = {pkgs, ... }: {
+        # Use touch ID when running darwin-rebuild command above:
+        security.pam.enableSudoTouchIdAuth = true;
 
         services.nix-daemon.enable = true;
         # Necessary for using flakes on this system.
@@ -38,6 +43,13 @@
 
         environment.systemPackages = with pkgs; [
         ];
+        homebrew = {
+          enable = true;
+          # onActivation.cleanup = "uninstall";
+          taps = [];
+          brews = [ "cowsay" ];
+          casks = [];
+        };
     };
   in
   {
