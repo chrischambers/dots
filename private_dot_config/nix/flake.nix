@@ -36,11 +36,12 @@
         # Create /etc/zshrc that loads the nix-darwin environment.
         programs.zsh.enable = true;
 
-        environment.systemPackages = [ ];
+        environment.systemPackages = with pkgs; [
+        ];
     };
   in
   {
-    darwinConfigurations."argos" = nix-darwin.lib.darwinSystem {
+    darwinConfigurations."Argos" = nix-darwin.lib.darwinSystem {
       modules = [
          configuration
       ];
