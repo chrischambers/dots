@@ -37,9 +37,9 @@
         nixpkgs.hostPlatform = "aarch64-darwin";
 
         # Declare the user that will be running `nix-darwin`.
-        users.users.diomedes = {
-            name = "diomedes";
-            home = "/Users/diomedes";
+        users.users.{{ .chezmoi.username }} = {
+            name = {{ .chezmoi.username | quote }};
+            home = {{ .chezmoi.homeDir | quote }};
         };
 
         # Create /etc/zshrc that loads the nix-darwin environment.
@@ -70,7 +70,7 @@
     };
   in
   {
-    darwinConfigurations."Argos" = nix-darwin.lib.darwinSystem {
+    darwinConfigurations.{{ .chezmoi.hostname | quote }} = nix-darwin.lib.darwinSystem {
       modules = [
          configuration
          home-manager.darwinModules.home-manager  {
