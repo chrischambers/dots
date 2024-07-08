@@ -7,8 +7,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin = {
-        url = "github:LnL7/nix-darwin";
-        inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -38,15 +38,15 @@
 
         # Declare the user that will be running `nix-darwin`.
         users.users.{{ .chezmoi.username }} = {
-            name = {{ .chezmoi.username | quote }};
-            home = {{ .chezmoi.homeDir | quote }};
+          name = {{ .chezmoi.username | quote }};
+          home = {{ .chezmoi.homeDir | quote }};
         };
 
         # Create /etc/zshrc that loads the nix-darwin environment.
         programs.zsh.enable = true;
 
-        environment.systemPackages = with pkgs; [
-        ];
+        environment.systemPackages = with pkgs; [];
+
         homebrew = {
           enable = true;
           # onActivation.cleanup = "uninstall";
@@ -59,10 +59,14 @@
       # this is internal compatibility configuration
       # for home-manager, don't change this!
       home.stateVersion = "24.05";
-      # Let home-manager install and manage itself.
+
+      # Let home-manager install and manage itself:
       programs.home-manager.enable = true;
 
-      home.packages = with pkgs; [];
+      home.packages = with pkgs; [
+        pkgs.nixfmt-rfc-style
+        pkgs.nix-direnv
+      ];
 
       home.sessionVariables = {
         EDITOR = "emacsclient -c -a 'emacs'";
