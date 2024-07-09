@@ -52,8 +52,10 @@
           # onActivation.cleanup = "uninstall";
           taps = [];
           brews = [ "cowsay" ];
-          casks = [];
+          casks = [ "karabiner-elements" ];
         };
+
+        services.karabiner-elements.enable = false;
     };
     homeconfig = {pkgs, ...}: {
       # this is internal compatibility configuration
