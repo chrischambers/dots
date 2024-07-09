@@ -46,6 +46,11 @@
         programs.zsh.enable = true;
 
         environment.systemPackages = with pkgs; [];
+        environment.systemPath = [
+          "{{ .chezmoi.homeDir }}/bin"
+          "/opt/homebrew/bin"
+          "/opt/homebrew/sbin"
+        ];
 
         homebrew = {
           enable = true;
@@ -54,7 +59,6 @@
           brews = [ "cowsay" ];
           casks = [ ];
         };
-
         services.karabiner-elements.enable = true;
     };
     homeconfig = {pkgs, ...}: {
