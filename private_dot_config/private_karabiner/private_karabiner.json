@@ -18,7 +18,7 @@
                 },
                 "rules": [
                     {
-                        "description": "Caps Lock -> LeftCommand+Control+Shift+Option, Caps Lock -> Escape (if held alone for > 500 ms)",
+                        "description": "Caps Lock -> Shift+Option, Caps Lock -> Escape (if held alone for > 500 ms)",
                         "manipulators": [
                             {
                                 "from": {
@@ -33,9 +33,7 @@
                                     {
                                         "key_code": "left_shift",
                                         "modifiers": [
-                                            "left_option",
-                                            "left_command",
-                                            "left_control"
+                                            "left_option"
                                         ]
                                     }
                                 ],
@@ -50,7 +48,7 @@
                         ]
                     },
                     {
-                        "description": "Caps Lock + Shift -> Caps Lock, Caps Lock -> LeftCommand+Control+Shift+Option",
+                        "description": "Caps Lock + Shift -> Caps Lock, Caps Lock -> Shift+Option",
                         "manipulators": [
                             {
                                 "from": {
@@ -84,8 +82,6 @@
                                     {
                                         "key_code": "left_shift",
                                         "modifiers": [
-                                            "left_command",
-                                            "left_control",
                                             "left_option"
                                         ]
                                     }
