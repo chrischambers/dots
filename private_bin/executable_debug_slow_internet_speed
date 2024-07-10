@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Sources:
+# - https://github.com/croissong/dotfiles/
+# - https://everything.curl.dev/usingcurl/verbose/writeout.html
+# - https://askubuntu.com/questions/147377/how-to-debug-slow-browsing-speed
+
+curl -w "@${XDG_CONFIG_HOME}/curl/curl-timing.cfg" -o /dev/null -s "$1"
