@@ -6,14 +6,56 @@ source $HOME/.shell_common
 # NOTE: The XDG subdirectories need to exist, so we ensure that they do:
 mkdir -p $XDG_CACHE_HOME/zsh $XDG_STATE_HOME/zsh
 
-autoload -Uz compinit
-compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
-zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zsh/zcompcache
+# ----------------------------------------------------------------------
+# Set the directory we want to store zinit and plugins
+ZINIT_HOME="${XDG_DATA_HOME}/zinit/zinit.git"
 
+# Download Zinit, if it's not there yet
+if [ ! -d "$ZINIT_HOME" ]; then
+   mkdir -p "$(dirname $ZINIT_HOME)"
+   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
+
+# Source/Load zinit
+source "${ZINIT_HOME}/zinit.zsh"
+
+# Plugins:
+# --------
+zinit lucid wait for \
+  "zsh-users/zsh-completions"
+
+# Use C-f or right-arrow to accept suggestion:
+zinit lucid wait for \
+  "zsh-users/zsh-autosuggestions"
+
+# Syntax Highlighting should come last
+zinit lucid wait for \
+  "zsh-users/zsh-syntax-highlighting"
+
+# Turbo Mode: (i.e. quicker prompt startup times)
+# -----------------------------------------------
+# autoload -Uz compinit
+# compinit
+zi for \
+    atload"zicompinit; zicdreplay" \
+    blockf \
+    lucid \
+    wait \
+  zsh-users/zsh-completions
+
+# ----------------------------------------------------------------------
 # Completions:
+zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zsh/zcompcache
+compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
+
 unsetopt list_ambiguous  # ``find -ex<TAB>`` will complete up to 'exec', but
                          # also list the other completions (``-execdir``, in
                          # this case)
+
+# Something like vim's 'smartcase' - here, completion is case-insensitive where
+# lowercase letters are used, but not the reverse:
+zstyle ':completion:*:(^approximate):*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
 # History:
 
