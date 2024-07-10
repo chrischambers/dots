@@ -1,0 +1,25 @@
+root = true
+
+[*]
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[Makefile]
+indent_style = tab
+
+[*.py]
+indent_size = 4
+
+[*.sh]
+# shfmt options
+# https://github.com/mvdan/sh/blob/master/cmd/shfmt/shfmt.1.scd
+shell_variant      = bash
+switch_case_indent = false
+
+# [*.md]
+# trim_trailing_whitespace = false
+
+[*.org]
+indent_size = 2
