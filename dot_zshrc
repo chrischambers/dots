@@ -192,8 +192,7 @@ _fzf_comprun() {
 eval "$(direnv hook zsh)"
 
 # Zoxide:
-eval "$(zoxide init zsh)"
-alias cd="z"
+eval "$(zoxide init --cmd cd zsh)"
 
 # Prompt:
 export STARSHIP_CONFIG=~/.config/starship/zsh.toml
