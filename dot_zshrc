@@ -19,7 +19,7 @@ unsetopt list_ambiguous  # ``find -ex<TAB>`` will complete up to 'exec', but
 
 export HISTFILE="$XDG_STATE_HOME"/zsh/history
 HISTSIZE=10000
-SAVEHIST=10000
+SAVEHIST=$HISTSIZE
 setopt extended_history   # Adds extra info to history (esp. timestamps)
 setopt histverify         # History substitutions placed on cli for editing,
                           # not run automatically.
@@ -151,7 +151,6 @@ eval "$(direnv hook zsh)"
 
 # Zoxide:
 eval "$(zoxide init zsh)"
-# Test this out:
 alias cd="z"
 
 # Prompt:
