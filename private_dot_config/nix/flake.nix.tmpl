@@ -74,6 +74,7 @@
         pkgs.nix-direnv
       ];
 
+      # NOTE: Won't work unless home-manager manages dotfiles.
       home.sessionVariables = {
         EDITOR = "emacsclient -c -a 'emacs'";
       };

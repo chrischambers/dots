@@ -28,6 +28,9 @@ zinit lucid wait for \
 zinit lucid wait for \
   "zsh-users/zsh-autosuggestions"
 
+zinit lucid wait for \
+  "chrischambers/zsh-you-should-use"
+
 # Syntax Highlighting should come last
 zinit lucid wait for \
   "zsh-users/zsh-syntax-highlighting"
