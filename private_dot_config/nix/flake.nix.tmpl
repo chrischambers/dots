@@ -45,7 +45,14 @@
         # Create /etc/zshrc that loads the nix-darwin environment.
         programs.zsh.enable = true;
 
-        environment.systemPackages = with pkgs; [];
+        environment.systemPackages = with pkgs; [
+          as-tree          # show file/dir listing as tree
+          curlie           # curl / http like CLI
+          nil              # nix language server
+
+          csvlens          # csv viewing utility
+          tidy-viewer      # csv viewing utility
+        ];
         environment.systemPath = [
           "{{ .chezmoi.homeDir }}/bin"
           "/opt/homebrew/bin"
