@@ -128,6 +128,15 @@ export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f
 
 {{- if (eq .chezmoi.os "darwin") }}
 
+
+# Visual Configuration:
+# ----------------------------------------------------------------------
+# Avoid background colours for o+w without sticky bit (often in nfs shares)
+# - it's basically illegible with my themes. This works with lsd as well as ls.
+#
+# source: https://superuser.com/questions/1598934/how-do-i-change-the-color-ls-in-the-console-for-files-if-group-owner-is-root
+export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
+
 # OSX Specific Configuration:
 # ----------------------------------------------------------------------
 
