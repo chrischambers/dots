@@ -16,7 +16,7 @@
     };
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, ... }:
   let
     configuration = {pkgs, ... }: {
         # Use touch ID when running darwin-rebuild command above:
@@ -52,6 +52,20 @@
 
           csvlens          # csv viewing utility
           tidy-viewer      # csv viewing utility
+
+          emacsPackages.jinx # spell-checking
+          # enchant          # spell-checking
+
+          bash-language-server
+          # nodejs_latest
+          # nodePackages_latest.prettier
+          # FIXME: ln -s /run/current-system/sw/bin/zprint ~/bin/clj-zprint
+          zprint
+
+          chromaprint # acoustid interface for beet
+          mp3val
+          # essentia-extractor # obtain higher-level musical information for songs
+          # youtube-dl
         ];
         environment.systemPath = [
           "{{ .chezmoi.homeDir }}/bin"
@@ -62,8 +76,8 @@
         homebrew = {
           enable = true;
           # onActivation.cleanup = "uninstall";
-          taps = [];
-          brews = [ "cowsay" ];
+          taps = [ "nextjournal/brew" ];
+          brews = [ "cowsay" "nextjournal/brew/garden" "yt-dlp" ];
           casks = [ ];
         };
         services.karabiner-elements.enable = true;
@@ -77,8 +91,8 @@
       programs.home-manager.enable = true;
 
       home.packages = with pkgs; [
-        pkgs.nixfmt-rfc-style
-        pkgs.nix-direnv
+        nixfmt-rfc-style
+        nix-direnv
       ];
 
       # NOTE: Won't work unless home-manager manages dotfiles.
