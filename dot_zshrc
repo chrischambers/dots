@@ -127,13 +127,16 @@ bindkey -M viins "\C-x\C-e" edit-command-line
 
 set -o vi
 
-KEYTIMEOUT=10  # Default: 40, set lower to reduce escape key delay
+export KEYTIMEOUT=10  # Default: 40, set lower to reduce escape key delay
 
 # fzf:
-# You need to manually symlink the correct homebrew fzf/shell location to ~/.fzf
-# for the following to work:
-[[ -f ~/.fzf/completion.zsh ]] && source ~/.fzf/completion.zsh
-[[ -f ~/.fzf/key-bindings.zsh ]] && source ~/.fzf/key-bindings.zsh
+fzf_version=$(echo "$(fzf --version)" | sed 's/ (brew)//')
+fzf_source_path="${HOMEBREW_CELLAR}/fzf/${fzf_version}/shell/"
+
+[[ -r "${fzf_source_path}/completion.zsh" ]] && \
+  source "${fzf_source_path}/completion.zsh"
+[[ -r "${fzf_source_path}/key-bindings.zsh" ]] && \
+  source "${fzf_source_path}/key-bindings.zsh"
 
 # -- Use fd instead of find --
 
