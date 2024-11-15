@@ -145,4 +145,8 @@ function brave() {
     # E.g. "brave --incognito"
     open -a "Brave Browser.app" -n --args "$@"
 }
+
+# Ensure mactex binaries added to $PATH:
+append_to_path "/Library/TeX/texbin"
+
 {{- end }}
