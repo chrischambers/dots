@@ -1,5 +1,7 @@
-{:style  [:community :justified :respect-nl]
- :map    {:comma? false}
- :fn-map {"->"  :none-body
-          "->>" :none-body
-          "are" [:guided {:style {:style-call :areguide :max-variance 1000}}]}}
+{:search-config? true
+ :style          [:community :justified :respect-nl]
+ :map            {:comma? false}
+ :fn-map         {"->"  :none-body
+                  "->>" :none-body
+                  "are" [:guided
+                         {:style {:style-call :areguide :max-variance 1000}}]}}
