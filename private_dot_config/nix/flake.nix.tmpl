@@ -5,14 +5,14 @@
   # darwin-rebuild switch --flake ~/.config/nix
 
   inputs = {
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     nix-darwin = {
-      url = "github:LnL7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
+      url = "github:LnL7/nix-darwin/nix-darwin-24.11";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
+      url = "github:nix-community/home-manager/release-24.11";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -24,7 +24,7 @@
 
         services.nix-daemon.enable = true;
         # Necessary for using flakes on this system.
-        nix.settings.experimental-features = "nix-command flakes repl-flake";
+        nix.settings.experimental-features = "nix-command flakes";
 
         system.configurationRevision = self.rev or self.dirtyRev or null;
 
@@ -53,7 +53,7 @@
           csvlens          # csv viewing utility
           tidy-viewer      # csv viewing utility
 
-          emacsPackages.jinx # spell-checking
+          # emacsPackages.jinx # spell-checking
           # enchant          # spell-checking
 
           # bash-language-server
@@ -70,6 +70,8 @@
           mp3val
           # essentia-extractor # obtain higher-level musical information for songs
           # youtube-dl
+
+          scala_2_13
         ];
         environment.systemPath = [
           "{{ .chezmoi.homeDir }}/bin"
@@ -82,10 +84,11 @@
           enable = true;
           # onActivation.cleanup = "uninstall";
           taps = [ "nextjournal/brew" ];
-          brews = [ "cowsay" "nextjournal/brew/garden" "yt-dlp" ];
+          brews = [ "cowsay" "enchant" "nextjournal/brew/garden" "yt-dlp" ];
           casks = [ "disk-inventory-x" "tinymediamanager" ];
         };
-        services.karabiner-elements.enable = true;
+        # https://github.com/LnL7/nix-darwin/issues/1041
+        # services.karabiner-elements.enable = true;
     };
     homeconfig = {pkgs, ...}: {
       # this is internal compatibility configuration
