@@ -482,7 +482,7 @@ c.InteractiveShell.enable_html_pager = True
 ## Enables rich html representation of docstrings. (This requires the docrepr
 #  module).
 #  Default: False
-c.InteractiveShell.sphinxify_docstring = True
+c.InteractiveShell.sphinxify_docstring = False # nix doesn't have docrepr package
 
 #  Default: True
 # c.InteractiveShell.wildcards_case_sensitive = True
