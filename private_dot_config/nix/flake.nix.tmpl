@@ -1,3 +1,8 @@
+# Manual Steps Required:
+
+# - Add raycast script for launching emacs via terminal login-shell
+#   currrently in Dropbox/raycast_scripts/emacs
+
 {
   description = "My system configuration";
   # Command to reload:
@@ -71,7 +76,8 @@
           # essentia-extractor # obtain higher-level musical information for songs
           # youtube-dl
 
-          scala_2_13
+          scala
+          julia
         ];
         environment.systemPath = [
           "{{ .chezmoi.homeDir }}/bin"
