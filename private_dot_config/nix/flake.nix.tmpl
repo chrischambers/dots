@@ -76,8 +76,8 @@
           # essentia-extractor # obtain higher-level musical information for songs
           # youtube-dl
 
+          # julia-bin
           scala
-          julia
         ];
         environment.systemPath = [
           "{{ .chezmoi.homeDir }}/bin"
@@ -90,7 +90,7 @@
           enable = true;
           # onActivation.cleanup = "uninstall";
           taps = [ "nextjournal/brew" ];
-          brews = [ "cowsay" "enchant" "nextjournal/brew/garden" "yt-dlp" ];
+          brews = [ "cowsay" "enchant" "julia" "nextjournal/brew/garden" "yt-dlp" ];
           casks = [ "disk-inventory-x" "tinymediamanager" ];
         };
         # https://github.com/LnL7/nix-darwin/issues/1041
