@@ -12,6 +12,9 @@
         # Avoids using pager if output fits onscreen:
         # pager = less -FRSX
         pager = delta
+        # For those projects which (oddly) contain carriage return characters
+        # in source files (like the Clojure source code):
+        autoctrlf = input
 [delta]
         navigate = true  # use n and N to move between diff sections
 
