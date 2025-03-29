@@ -1,5 +1,5 @@
 {:search-config? true
- :style          [:community :justified :respect-nl]
+ :style          [:community :justified :sort-require :respect-nl]
  :map            {:comma? false}
  :fn-map         {">def"  :arg1-body
                   ">defn" :arg1-body
