@@ -1,11 +1,19 @@
 {:search-config? true
- :style          [:community :justified :sort-require :ns-justify :respect-nl]
+ :style          [:community
+                  ;; :pair-nl-all
+                  :backtranslate
+                  :extend-nl
+                  :justified
+                  :sort-require
+                  :ns-justify
+                  :respect-nl]
  :map            {:comma? false}
- :fn-map         {">def"    "def"
-                  ">defn"   "defn"
-                  "gen-let" "let"
-                  "->"      :none-body
-                  "->>"     :none-body
-                  "are"     [:guided
-                             {:style {:style-call   :areguide
-                                      :max-variance 1000}}]}}
+ :fn-map         {">def"        "def"
+                  ">defn"       "defn"
+                  "gen-let"     "let"
+                  "print-forms" "let"
+                  "->"          :none-body
+                  "->>"         :none-body
+                  "are"         [:guided
+                                 {:style {:style-call   :areguide
+                                          :max-variance 1000}}]}}
