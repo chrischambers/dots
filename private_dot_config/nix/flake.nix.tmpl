@@ -62,7 +62,7 @@
 
           nil                     # nix language server
           jdt-language-server     # java language server
-          bash-language-server
+          # bash-language-server
           #nodePackages_latest.vscode-html-languageserver-bin
 
           # nodejs_latest
@@ -76,7 +76,7 @@
           # essentia-extractor    # obtain higher-level musical information for songs
           # youtube-dl
 
-          # julia-bin
+          julia-bin
           scala
 
           # pgformatter
@@ -94,7 +94,7 @@
           enable = true;
           # onActivation.cleanup = "uninstall";
           taps = [ "nextjournal/brew" ];
-          brews = [ "cowsay" "enchant" "julia" "nextjournal/brew/garden" "yt-dlp" ];
+          brews = [ "bash-language-server" "cowsay" "enchant" "nextjournal/brew/garden" "yt-dlp" ];
           casks = [ "disk-inventory-x" "tinymediamanager" ];
         };
         # https://github.com/LnL7/nix-darwin/issues/1041
