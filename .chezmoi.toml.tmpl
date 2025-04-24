@@ -2,10 +2,11 @@
 {{- $email := promptStringOnce . "email" "Email Address" "magma.chambers@gmail.com" -}}
 {{- $gituser := promptStringOnce . "gituser" "Github/Gitlab username" "chrischambers" -}}
 
+encryption = "gpg"
+
 [data]
   name = {{ $name | quote }}
   email = {{ $email | quote }}
-  encryption = "gpg"
   gituser = {{ $gituser | quote  }}
 
 [gpg]
