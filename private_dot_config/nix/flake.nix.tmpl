@@ -1,7 +1,7 @@
 # Manual Steps Required:
 
 # - Add raycast script for launching emacs via terminal login-shell
-#   currrently in Dropbox/raycast_scripts/emacs
+#   currently in Dropbox/raycast_scripts/emacs
 
 {
   description = "My system configuration";
@@ -51,19 +51,18 @@
         programs.zsh.enable = true;
 
         environment.systemPackages = with pkgs; [
-          as-tree          # show file/dir listing as tree
-          curlie           # curl / http like CLI
-          nil              # nix language server
+          as-tree                 # show file/dir listing as tree
+          curlie                  # curl / http like CLI
 
-          csvlens          # csv viewing utility
-          tidy-viewer      # csv viewing utility
+          csvlens                 # csv viewing utility
+          tidy-viewer             # csv viewing utility
 
-          # emacsPackages.jinx # spell-checking
-          # enchant          # spell-checking
+          # emacsPackages.jinx    # spell-checking
+          # enchant               # spell-checking
 
-          # bash-language-server
-          jdt-language-server
-          nodePackages_latest.bash-language-server
+          nil                     # nix language server
+          jdt-language-server     # java language server
+          bash-language-server
           #nodePackages_latest.vscode-html-languageserver-bin
 
           # nodejs_latest
@@ -72,13 +71,17 @@
           # FIXME: ln -s /run/current-system/sw/bin/zprint ~/bin/clj-zprint
           # zprint
 
-          chromaprint # acoustid interface for beet
+          chromaprint             # acoustid interface for beet
           mp3val
-          # essentia-extractor # obtain higher-level musical information for songs
+          # essentia-extractor    # obtain higher-level musical information for songs
           # youtube-dl
 
           # julia-bin
           scala
+
+          # pgformatter
+          # sql-formatter
+          # sqls
         ];
         environment.systemPath = [
           "{{ .chezmoi.homeDir }}/bin"
