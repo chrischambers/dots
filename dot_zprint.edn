@@ -7,7 +7,9 @@
                   :sort-require
                   :ns-justify
                   :respect-nl]
- :map            {:comma? false}
+ :map            {:comma? false
+                  :key-value-options {:deps {:map {:respect-nl? false
+                                                   :sort?       true}}}}
  :fn-map         {">def"        "def"
                   ">defn"       "defn"
                   "gen-let"     "let"
