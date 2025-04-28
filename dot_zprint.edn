@@ -8,8 +8,15 @@
                   :ns-justify
                   :respect-nl]
  :map            {:comma? false
-                  :key-value-options {:deps {:map {:respect-nl? false
-                                                   :sort?       true}}}}
+                  :key-value-options
+                  {:deps       {:map {:justify     {:max-variance 1000}
+                                      :justify?    true
+                                      :respect-nl? false
+                                      :sort?       true}}
+                   :extra-deps {:map {:justify     {:max-variance 1000}
+                                      :justify?    true
+                                      :respect-nl? false
+                                      :sort?       true}}}}
  :fn-map         {">def"        "def"
                   ">defn"       "defn"
                   "gen-let"     "let"
