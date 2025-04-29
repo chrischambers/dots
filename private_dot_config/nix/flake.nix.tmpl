@@ -94,8 +94,13 @@
         homebrew = {
           enable = true;
           # onActivation.cleanup = "uninstall";
-          taps = [ "nextjournal/brew" ];
-          brews = [ "bash-language-server" "cowsay" "enchant" "nextjournal/brew/garden" "yt-dlp" ];
+          taps = [ "nextjournal/brew" "FelixKratz/formulae"];
+          brews = [ "bash-language-server"
+                    "cowsay"
+                    "enchant"
+                    "nextjournal/brew/garden"
+                    "yt-dlp"
+                    "felixkratz/formulae/sketchybar" ];
           casks = [ "disk-inventory-x" "tinymediamanager" ];
         };
         # https://github.com/LnL7/nix-darwin/issues/1041
