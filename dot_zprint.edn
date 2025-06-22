@@ -19,6 +19,7 @@
                                       :sort?       true}}}}
  :fn-map         {">def"        "def"
                   ">defn"       "defn"
+                  ">defn-"      "defn-"
                   "gen-let"     "let"
                   "print-forms" "let"
                   "->"          :none-body
