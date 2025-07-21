@@ -53,3 +53,5 @@ subsequences
 callables
 preorder
 quasiorder
+datalog
+recurse

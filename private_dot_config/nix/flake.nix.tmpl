@@ -52,12 +52,11 @@
 
         environment.systemPackages = with pkgs; [
           as-tree                 # show file/dir listing as tree
-          curlie                  # curl / http like CLI
 
           csvlens                 # csv viewing utility
           tidy-viewer             # csv viewing utility
 
-          fastfetch
+          fastfetch               # neofetch replacement
           # emacsPackages.jinx    # spell-checking
           # enchant               # spell-checking
 
@@ -80,9 +79,20 @@
           julia-bin
           scala
 
+          # ghostty
+          wezterm
           # pgformatter
           # sql-formatter
           # sqls
+
+          dust
+          dua
+          xh
+          # curlie                  # curl / http like CLI
+          fish
+          # atuin
+          fzf
+          fzf-git-sh
         ];
         environment.systemPath = [
           "{{ .chezmoi.homeDir }}/bin"
@@ -94,14 +104,19 @@
         homebrew = {
           enable = true;
           # onActivation.cleanup = "uninstall";
-          taps = [ "nextjournal/brew" "FelixKratz/formulae"];
+          taps = [ "nextjournal/brew"
+                   # "FelixKratz/formulae"
+                 ];
           brews = [ "bash-language-server"
                     "cowsay"
                     "enchant"
+                    # "felixkratz/formulae/sketchybar"
                     "nextjournal/brew/garden"
                     "yt-dlp"
-                    "felixkratz/formulae/sketchybar" ];
-          casks = [ "disk-inventory-x" "tinymediamanager" ];
+                  ];
+          casks = [ "disk-inventory-x"
+                    "ghostty"
+                    "tinymediamanager" ];
         };
         # https://github.com/LnL7/nix-darwin/issues/1041
         # services.karabiner-elements.enable = true;
@@ -123,6 +138,12 @@
       home.sessionVariables = {
         EDITOR = "emacsclient -c -a 'emacs'";
       };
+
+      programs.zsh.shellAliases = {
+        http = "xh";
+        https = "xhs";
+      };
+
     };
   in
   {

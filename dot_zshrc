@@ -127,16 +127,13 @@ bindkey -M viins "\C-x\C-e" edit-command-line
 
 set -o vi
 
-export KEYTIMEOUT=10  # Default: 40, set lower to reduce escape key delay
+export KEYTIMEOUT=30  # Default: 40, set lower to reduce escape key delay
 
 # fzf:
-fzf_version=$(echo "$(fzf --version)" | sed 's/ (brew)//')
-fzf_source_path="${HOMEBREW_CELLAR}/fzf/${fzf_version}/shell/"
-
-[[ -r "${fzf_source_path}/completion.zsh" ]] && \
-  source "${fzf_source_path}/completion.zsh"
-[[ -r "${fzf_source_path}/key-bindings.zsh" ]] && \
-  source "${fzf_source_path}/key-bindings.zsh"
+if [ -n "${commands[fzf-share]}" ]; then
+  source "$(fzf-share)/key-bindings.zsh"
+  source "$(fzf-share)/completion.zsh"
+fi
 
 # -- Use fd instead of find --
 
@@ -157,7 +154,7 @@ _fzf_compgen_dir() {
 # ------------------------------------------------------------------------------
 # Enable fzf-git integration:
 # Source: <https://www.josean.com/posts/7-amazing-cli-tools>
-source ~/src/fzf-git/fzf-git.sh
+source "$(nix path-info nixpkgs#fzf-git-sh)/share/fzf-git-sh/fzf-git.sh"
 
 # Note that keybinds need to be done quite quickly because of the KEYTIMEOUT value.
 
