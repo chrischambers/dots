@@ -118,19 +118,24 @@ clj-kondo-add-configs() {
 
 # Shared Utilities:
 # ----------------------------------------------------------------------
-
-# broot:
-source $HOME/.config/broot/launcher/bash/br
-
 # fzf theme:
 # Source: https://draculatheme.com/fzf
 export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
 
-{{- if (eq .chezmoi.os "darwin") }}
-
 # xh:
 alias http='xh'
 alias https='xhs'
+
+# yazi:
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
+
+{{- if (eq .chezmoi.os "darwin") }}
 
 # Visual Configuration:
 # ----------------------------------------------------------------------
