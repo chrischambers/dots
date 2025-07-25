@@ -11,7 +11,8 @@ font pango:SauceCodePro Nerd Font 12
 # ----------------------------------------------------------------------
 # Variables
 # ----------------------------------------------------------------------
-# Logo key. Use Mod1 for Alt.
+# Mod4 = Windows key
+# Mod1 = Alt key
 set $mod Mod4
 # Vim bindings:
 set $left h
@@ -72,10 +73,14 @@ input "6940:6985:Corsair_CORSAIR_K70_RGB_MK.2_Mechanical_Gaming_Keyboard" {
 # Key bindings
 # ----------------------------------------------------------------------
 # Basics:
-    bindsym $mod+Return exec $term       # Launch terminal
-    bindsym $mod+Shift+q kill            # Quit focussed window
-    bindsym $mod+d exec $menu            # Activate launcher
-    bindsym $mod+Shift+c reload          # Reload config
+    # Launch terminal
+    bindsym $mod+Return exec $term
+    # Quit focussed window
+    bindsym $mod+Shift+q kill
+    # Activate launcher
+    bindsym $mod+d exec $menu
+    # Reload config
+    bindsym $mod+Shift+c reload
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -139,15 +144,16 @@ input "6940:6985:Corsair_CORSAIR_K70_RGB_MK.2_Mechanical_Gaming_Keyboard" {
 
 # Layout stuff:
 
-    # You can "split" the current object of your focus with
-    # $mod+b or $mod+v, for horizontal and vertical splits
-    # respectively.
+    # For current pane, determines whether next split will occur
+    # horizontally or vertically:
     bindsym $mod+b splith
     bindsym $mod+v splitv
 
     # Switch the current container between different layout styles
+    # (You may need to use this in combination with select parent (Win+a))
     bindsym $mod+s layout stacking
     bindsym $mod+w layout tabbed
+    # vertical ⇔ horizontal
     bindsym $mod+e layout toggle split
 
     # Make the current focus fullscreen
