@@ -148,7 +148,7 @@ bind -n M-Right run "(tmux display-message -p '#{pane_current_command}' | grep -
 set -g prefix '\'
 bind '\' send-prefix
 
-set-option -s set-clipboard off
+set-option -s set-clipboard on
 # bind b run "tmux save-buffer - | xclip -i -selection clipboard" \; display-message "Copied to system clipboard"
 
 # Setup 'v' to begin selection as in Vim:
