@@ -98,7 +98,15 @@
           yazi
 
           unimatrix
+
+          groff
         ];
+
+        # Creates symlink at /run/current-system/etc/fzf-git:
+        environment.etc."fzf-git" = {
+          source = "${pkgs.fzf-git-sh}/share/fzf-git-sh/fzf-git.sh";
+        };
+
         environment.systemPath = [
           "{{ .chezmoi.homeDir }}/bin"
           "/opt/homebrew/bin"
@@ -133,7 +141,6 @@
 
       # Let home-manager install and manage itself:
       programs.home-manager.enable = true;
-
       home.packages = with pkgs; [
         nixfmt-rfc-style
         nix-direnv
