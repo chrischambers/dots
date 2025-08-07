@@ -1,1 +1,3 @@
 # -*- mode: bash-ts -*-
+
+source "$HOME/.shell_common"
