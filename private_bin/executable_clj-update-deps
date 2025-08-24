@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+clojure -Tantq outdated :upgrade true :check-clojure-tools true
