@@ -111,11 +111,6 @@ prepend_to_path "$HOME/.ghcup/bin"
 # Rust:
 [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
 
-# Clojure:
-clj-kondo-add-configs() {
-  clj-kondo --lint "$(clojure -Spath)" --dependencies --parallel --copy-configs
-}
-
 # Shared Utilities:
 # ----------------------------------------------------------------------
 # fzf theme:
