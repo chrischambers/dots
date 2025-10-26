@@ -17,13 +17,14 @@
                                       :justify?    true
                                       :respect-nl? false
                                       :sort?       true}}}}
- :fn-map         {">def"        "def"
-                  ">defn"       "defn"
-                  ">defn-"      "defn-"
-                  "gen-let"     "let"
-                  "print-forms" "let"
-                  "->"          :none-body
-                  "->>"         :none-body
-                  "are"         [:guided
-                                 {:style {:style-call   :areguide
-                                          :max-variance 1000}}]}}
+ :fn-map         {">def"           "def"
+                  ">defn"          "defn"
+                  ">defn-"         "defn-"
+                  "gen-let"        "let"
+                  "letfn-memoized" "letfn"
+                  "print-forms"    "let"
+                  "->"             :none-body
+                  "->>"            :none-body
+                  "are"            [:guided
+                                    {:style {:style-call   :areguide
+                                             :max-variance 1000}}]}}
