@@ -161,7 +161,7 @@
     };
   in
   {
-    darwinConfigurations.{{ .chezmoi.hostname | quote }} = nix-darwin.lib.darwinSystem {
+    darwinConfigurations.{{ .chezmoi.hostname | title | quote }} = nix-darwin.lib.darwinSystem {
       modules = [
          configuration
          home-manager.darwinModules.home-manager  {
