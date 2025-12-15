@@ -110,6 +110,12 @@
           nodejs_22
 
           nixd
+
+          vips
+          postgresql
+          syncthing
+          # syncthingtray (fails to build, yet works via 'nix-shell -p syncthingtray')
+          sdcv  # stardict dictionary viewer, for Webster's 1913
         ];
 
         # Creates symlink at /run/current-system/etc/fzf-git:
@@ -140,7 +146,11 @@
                   ];
           casks = [ "disk-inventory-x"
                     "ghostty"
-                    "tinymediamanager" ];
+                    "tinymediamanager"
+                    # Run the following command after installing xournal++:
+                    # xattr -c /Applications/Xournal++.app
+                    "xournal++"
+                  ];
         };
         # https://github.com/LnL7/nix-darwin/issues/1041
         # services.karabiner-elements.enable = true;
