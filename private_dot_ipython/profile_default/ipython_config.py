@@ -598,12 +598,6 @@ c.TerminalInteractiveShell.extra_open_editor_shortcuts = True
 #  Default: True
 # c.TerminalInteractiveShell.highlight_matching_brackets = True
 
-## The name or class of a Pygments style to use for syntax highlighting. To see
-#  available styles, run `pygmentize -L styles`.
-#  Default: traitlets.Undefined
-# c.TerminalInteractiveShell.highlighting_style = traitlets.Undefined
-c.TerminalInteractiveShell.highlighting_style = "monokai"
-
 ## Override highlighting format for specific tokens
 #  Default: {}
 # c.TerminalInteractiveShell.highlighting_style_overrides = {}
