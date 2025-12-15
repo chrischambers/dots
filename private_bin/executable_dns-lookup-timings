@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# Simple script which reports DNS lookup times for a variety of hostnames (i)
+# using a variety of DNS servers (j).
+
+for i in "facebook.com" "google.com" "reddit.com" "bbc.co.uk"
+do
+  for j in "1.1.1.1" "4.2.2.2" "8.8.8.8" "208.67.222.222" "213.120.234.58" "213.120.234.10"
+  do
+    echo $j $i `dig @$j $i | grep Query | awk -F ":" '{print $2}'`
+  done
+done
