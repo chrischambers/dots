@@ -1,2 +1,3 @@
 .clj-kondo/
 .lsp/
+private_dot_config/zed/prompts
