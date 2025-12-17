@@ -1,0 +1,19 @@
+session_name: default
+start_directory: ~
+
+windows:
+  - window_name: main
+    layout: tiled
+    panes:
+      - shell_command:
+          - cd ~/Dropbox/notes
+        focus: false
+        pane_name: notes
+
+      - shell_command:
+          - cd ~/emacsen/mine
+        focus: false
+        pane_name: emacs
+
+      - shell_command: []
+        focus: true

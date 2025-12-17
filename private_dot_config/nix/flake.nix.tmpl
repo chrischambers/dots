@@ -116,6 +116,8 @@
           syncthing
           # syncthingtray (fails to build, yet works via 'nix-shell -p syncthingtray')
           sdcv  # stardict dictionary viewer, for Webster's 1913
+
+          tmuxp # tmux session manager
         ];
 
         # Creates symlink at /run/current-system/etc/fzf-git:
@@ -139,6 +141,11 @@
           brews = [ "bash-language-server"
                     "cowsay"
                     "enchant"
+                    {name = "d12frosted/emacs-plus/emacs-plus@30";
+                     args = ["with-c9rgreen-sonoma-icon"
+                             "with-imagemagick"
+                             "with-xwidgets"
+                             ];}
                     "julia"
                     # "felixkratz/formulae/sketchybar"
                     "nextjournal/brew/garden"
