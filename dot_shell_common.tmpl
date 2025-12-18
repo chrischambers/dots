@@ -3,13 +3,36 @@
 # Common Functions:
 # ----------------------------------------------------------------------
 path_remove() {
-    # Removes all occurrences of $1 from PATH
-    # Exact, colon-delimited match only
-    PATH=$(printf '%s' "$PATH" \
-        | awk -v RS=: -v ORS=: -v target="$1" '
-            $0 != target { print }
-          ' \
-        | sed 's/:$//')
+  # Removes all occurrences of $1 from PATH
+  # Exact, colon-delimited match only
+  [ -z "$1" ] && return
+
+  local target=$1
+  local result= p
+
+  case ":$PATH:" in
+    *":$target:"*) ;;
+    *) return ;;
+  esac
+
+  result=
+  while :; do
+    case $PATH in
+      *:*)
+        p=${PATH%%:*}
+        PATH=${PATH#*:}
+        ;;
+      *)
+        p=$PATH
+        PATH=
+        ;;
+    esac
+
+    [ "$p" = "$target" ] || result="${result:+$result:}$p"
+    [ -z "$PATH" ] && break
+  done
+
+  PATH=$result
 }
 
 prepend_to_path() {
