@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+Activate via:
+
+launchctl load -w ~/Library/LaunchAgents/emacs.plist
+-->
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>emacs-plus</string>
+    <!-- Kept for reference purposes -->
+    <key>EnvironmentVariables</key>
+    <dict>
+      <key>ZOMGDUDE</key>
+      <string>yes</string>
+    </dict>
+    <!-- Cargo-culted from the homebrew service -->
+    <key>LimitLoadToSessionType</key>
+    <array>
+      <string>Aqua</string>
+      <string>Background</string>
+      <string>LoginWindow</string>
+      <string>StandardIO</string>
+      <string>System</string>
+    </array>
+    <key>ProgramArguments</key>
+    <array>
+      <string>/bin/zsh</string>
+      <string>-l</string>
+      <string>-c</string>
+      <string>exec /opt/homebrew/opt/emacs-plus/bin/emacs --fg-daemon</string>
+    </array>
+    <key>KeepAlive</key>
+    <true/>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>StandardErrorPath</key>
+    <string>/tmp/emacs.stderr.log</string>
+    <key>StandardOutPath</key>
+    <string>/tmp/emacs.stdout.log</string>
+  </dict>
+</plist>
