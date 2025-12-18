@@ -154,11 +154,9 @@ _fzf_compgen_dir() {
 # ------------------------------------------------------------------------------
 # Enable fzf-git integration:
 # Source: <https://www.josean.com/posts/7-amazing-cli-tools>
-# Depends on this nix config to work properly across both nixos/nix-darwin:
-
-#    environment.etc."fzf-git" = {
-#      source = "${pkgs.fzf-git-sh}/share/fzf-git-sh/fzf-git.sh";
-#    };
+# source "$(nix path-info nixpkgs#fzf-git-sh)/share/fzf-git-sh/fzf-git.sh"
+# source $(nix-build --no-out-link '<nixpkgs>' -A fzf-git-sh)/share/fzf-git-sh/fzf-git.sh
+# source /run/current-system/sw/share/fzf-git-sh/fzf-git.sh
 source /run/current-system/etc/fzf-git
 
 # Note that keybinds need to be done quite quickly because of the KEYTIMEOUT value.

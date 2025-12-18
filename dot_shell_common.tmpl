@@ -2,30 +2,26 @@
 
 # Common Functions:
 # ----------------------------------------------------------------------
-# POSIX-compliant path manipulation without inserting duplicates.
-# Source: https://stackoverflow.com/questions/135754/how-to-keep-from-duplicating-path-variable-in-csh#answer-5048977
+path_remove() {
+    # Removes all occurrences of $1 from PATH
+    # Exact, colon-delimited match only
+    PATH=$(printf '%s' "$PATH" \
+        | awk -v RS=: -v ORS=: -v target="$1" '
+            $0 != target { print }
+          ' \
+        | sed 's/:$//')
+}
+
 prepend_to_path() {
-    local SAVED_IFS="$IFS"
-    local dir
-    IFS=:
-    for dir in $1 ; do
-	if ! $( echo "$PATH" | tr ":" "\n" | grep -qx "$dir" ) ; then
-	    PATH=$dir:$PATH
-	fi
-    done
-    IFS="$SAVED_IFS"
+    [ -z "$1" ] && return 1
+    path_remove "$1"
+    PATH="$1${PATH:+:$PATH}"
 }
 
 append_to_path() {
-    local SAVED_IFS="$IFS"
-    local dir
-    IFS=:
-    for dir in $1 ; do
-	if ! $( echo "$PATH" | tr ":" "\n" | grep -qx "$dir" ) ; then
-	    PATH=$PATH:$dir
-	fi
-    done
-    IFS="$SAVED_IFS"
+    [ -z "$1" ] && return 1
+    path_remove "$1"
+    PATH="${PATH:+$PATH:}$1"
 }
 
 body() {
@@ -58,12 +54,8 @@ prepend_to_path "/usr/local/sbin"
 
 {{ if eq .chezmoi.os "darwin" -}}
 # Update environment with homebrew information/path modifications:
-
-prepend_to_path "/opt/homebrew/bin"
 eval "$(brew shellenv)"
 {{- end }}
-
-prepend_to_path "$HOME/bin"
 
 # Aliases:
 # ----------------------------------------------------------------------
@@ -92,21 +84,21 @@ fi
 
 # Colourised Man Pages:
 # ----------------------------------------------------------------------
-export LESS_TERMCAP_mb=$'\e[1;32m'
-export LESS_TERMCAP_md=$'\e[1;32m'
-export LESS_TERMCAP_me=$'\e[0m'
-export LESS_TERMCAP_se=$'\e[0m'
-export LESS_TERMCAP_so=$'\e[01;33m'
-export LESS_TERMCAP_ue=$'\e[0m'
-export LESS_TERMCAP_us=$'\e[1;4;31m'
+# export LESS_TERMCAP_mb=$'\e[1;32m'
+# export LESS_TERMCAP_md=$'\e[1;32m'
+# export LESS_TERMCAP_me=$'\e[0m'
+# export LESS_TERMCAP_se=$'\e[0m'
+# export LESS_TERMCAP_so=$'\e[01;33m'
+# export LESS_TERMCAP_ue=$'\e[0m'
+# export LESS_TERMCAP_us=$'\e[1;4;31m'
 
 # Editor:
 # ----------------------------------------------------------------------
 {{- if (eq .chezmoi.os "darwin") }}
 export EMACS_PLUS_NO_PATH_INJECTION=1
 {{- end }}
-alias e="emacsclient -c -a 'emacs'"
-export EDITOR="emacsclient -c -a 'emacs'"
+alias e="emacsclient -c -a ''"
+export EDITOR="emacsclient -c -a ''"
 export VISUAL=$EDITOR
 
 # Python Aliases:
@@ -143,15 +135,21 @@ function y() {
 	rm -f -- "$tmp"
 }
 
-{{- if (eq .chezmoi.os "darwin") }}
-
 # Visual Configuration:
 # ----------------------------------------------------------------------
 # Avoid background colours for o+w without sticky bit (often in nfs shares)
 # - it's basically illegible with my themes. This works with lsd as well as ls.
 #
 # source: https://superuser.com/questions/1598934/how-do-i-change-the-color-ls-in-the-console-for-files-if-group-owner-is-root
+
 export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:"
+
+# Tmux Configuration:
+# ----------------------------------------------------------------------
+export DISABLE_AUTO_TITLE='true'
+export TMUXP_CONFIGDIR="${XDG_CONFIG_HOME}/tmuxp"
+
+{{- if (eq .chezmoi.os "darwin") }}
 
 # OSX Specific Configuration:
 # ----------------------------------------------------------------------
@@ -166,3 +164,5 @@ function brave() {
 append_to_path "/Library/TeX/texbin"
 
 {{- end }}
+
+prepend_to_path "$HOME/bin"

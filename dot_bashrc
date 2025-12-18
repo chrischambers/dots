@@ -1,24 +1,3 @@
 # -*- mode: bash-ts -*-
 
 source $HOME/.shell_common
-
-# Prompt:
-export STARSHIP_CONFIG=~/.config/starship/bash.toml
-eval "$(starship init bash)"
-
-# fzf:
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-# direnv:
-eval "$(direnv hook bash)"
-
-# History:
-mkdir -p "$XDG_STATE_HOME"/bash
-export HISTFILE="$XDG_STATE_HOME"/bash/history
-touch $HISTFILE
-hgrep() {
-   history | grep "$@"
-}
-
-# Zoxide:
-eval "$(zoxide init --cmd cd bash)"
