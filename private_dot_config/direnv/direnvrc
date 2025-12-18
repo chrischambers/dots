@@ -1,7 +1,10 @@
-nix_profile_direnvrc="$HOME/.nix-profile/share/nix-direnv/direnvrc"
+# -*- mode: bash-ts -*-
 
-if [[ -r $nix_profile_direnvrc ]]; then
-  source $nix_profile_direnvrc
+# nix_profile_direnvrc="$HOME/.nix-profile/share/nix-direnv/direnvrc"
+nix_direnv_script="$(nix eval --raw nixpkgs#nix-direnv.outPath)/share/nix-direnv/direnvrc"
+
+if [[ -r $nix_direnv_script ]]; then
+  source $nix_direnv_script
 else
-  echo "nix_profile_direnvrc not found at: $nix_profile_direnvrc"
+  echo "nix_direnv_script not found at: $nix_direnv_script"
 fi
