@@ -10,13 +10,13 @@
   # darwin-rebuild switch --flake ~/.config/nix
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     nix-darwin = {
-      url = "github:LnL7/nix-darwin/nix-darwin-24.11";
+      url = "github:LnL7/nix-darwin/nix-darwin-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -25,9 +25,8 @@
   let
     configuration = {pkgs, ... }: {
         # Use touch ID when running darwin-rebuild command above:
-        security.pam.enableSudoTouchIdAuth = true;
+        security.pam.services.sudo_local.touchIdAuth = true;
 
-        services.nix-daemon.enable = true;
         # Necessary for using flakes on this system.
         nix.settings.experimental-features = "nix-command flakes";
 
@@ -46,6 +45,7 @@
           name = {{ .chezmoi.username | quote }};
           home = {{ .chezmoi.homeDir | quote }};
         };
+        system.primaryUser = "{{ .chezmoi.username }}";
 
         # Create /etc/zshrc that loads the nix-darwin environment.
         programs.zsh.enable = true;
