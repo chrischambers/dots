@@ -3,3 +3,5 @@
 main() {
   clj-kondo --lint "$(clojure -Spath)" --dependencies --parallel --copy-configs
 }
+
+main
