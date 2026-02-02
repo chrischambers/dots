@@ -1,0 +1,3 @@
+#!/bin/bash
+
+magick convert "$1" -background white -flatten "$1"

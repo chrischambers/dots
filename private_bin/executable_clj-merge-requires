@@ -1,0 +1,150 @@
+#!/usr/bin/env bb
+
+(ns medley.core
+  "A small collection of useful, mostly pure functions that might not look out
+  of place in the clojure.core namespace."
+  (:refer-clojure :exclude [abs boolean? ex-cause ex-message random-uuid regexp?
+                            uuid uuid?]))
+
+(defn find-first
+  "Finds the first item in a collection that matches a predicate. Returns a
+  transducer when no collection is provided."
+  ([pred]
+   (fn [rf]
+     (fn
+       ([] (rf))
+       ([result] (rf result))
+       ([result x]
+        (if (pred x)
+          (ensure-reduced (rf result x))
+          result)))))
+  ([pred coll]
+   (reduce (fn [_ x] (when (pred x) (reduced x))) nil coll)))
+
+(defn replace-nth
+  "Returns a lazy sequence of the items in coll, with a new item replacing the
+  item at the supplied index. Runs in O(n) time. Returns a stateful transducer
+  when no collection is provided."
+  {:added "1.2.0"}
+  ([index item]
+   (fn [rf]
+     (let [idx (volatile! (inc index))]
+       (fn
+         ([] (rf))
+         ([result] (rf result))
+         ([result x]
+          (if (zero? (vswap! idx dec))
+            (rf result item)
+            (rf result x)))))))
+  ([index item coll]
+   (lazy-seq
+    (if (zero? index)
+      (cons item (rest coll))
+      (when (seq coll)
+        (cons (first coll) (replace-nth (dec index) item (rest coll))))))))
+
+(ns emacs-clojure.merge-requires
+  (:require
+   [clojure.edn  :as edn]
+   [edamame.core :as e]
+   [medley.core  :as m]))
+
+(defn index-where
+  [pred coll]
+  (some (fn [[idx val]]
+          (when (pred val) idx))
+        (map-indexed vector coll)))
+
+(defn parse-file
+  [path]
+  (e/parse-string-all (slurp path) {:auto-resolve-ns true :all true}))
+
+(defn get-ns-form
+  [st]
+  (when (= 'ns (ffirst st))
+    (first st)))
+
+(defn get-require-index
+  [ns-form]
+  (index-where #(and (seq? %) (= (first %) :require)) ns-form))
+
+(defn ns-require-form
+  [st]
+  (when-let [[_ _ & forms] (get-ns-form st)]
+    (m/find-first #(= :require (first %)) forms)))
+
+(defn require-libspecs
+  [st]
+  (rest (ns-require-form st)))
+
+(defn libspec->map
+  [[lib & parts]]
+  (into {:library lib} (map vec (partition 2 parts))))
+
+(defn map->libspec
+  [{:keys [library as refer exclude rename only]}]
+  (cond-> [library]
+    as      (conj :as as)
+    refer   (conj :refer refer)
+    only    (conj :only only)
+    rename  (conj :rename rename)
+    exclude (conj :exclude exclude)))
+
+(defn merge-libspecs
+  "Merges variadic `libspecs`:
+
+   - vectors will be concatenated, sorted and de-duplicated
+   - the latest alias (i.e. `:as`) will take precedence."
+  [& libspecs]
+  (loop [[x & xr :as xs] libspecs
+         acc {}]
+    (if (empty? xs)
+      (map map->libspec (vals acc))
+      (let [m     (libspec->map x)
+            lib   (:library m)
+            seen? (acc lib)]
+        (if (not seen?)
+          (recur xr (assoc acc lib m))
+          (let [alias (or (:as m) (:as seen?))
+                new   (-> (merge-with
+                           (comp vec sort distinct into)
+                           (dissoc seen? :library :as)
+                           (dissoc m :library :as))
+                          (assoc :library lib)
+                          (assoc :as alias))
+                acc   (assoc acc lib new)]
+            (recur xr acc)))))))
+
+(defn find-top-level-requires
+  "Finds any require forms not in the namespace at the outermost scope"
+  [forms]
+  (let [requires (filter #(= (first %) 'require) forms)
+        libspecs (map (comp second second) requires)]
+    libspecs))
+
+(defn- merge-libspecs-in
+  [st & extra-libspecs]
+  (let [libspecs           (require-libspecs st)
+        top-level-libspecs (find-top-level-requires st)
+        all-libspecs       (concat libspecs top-level-libspecs extra-libspecs)]
+    (sort-by first (apply merge-libspecs all-libspecs))))
+
+(defn update-ns-requires
+  [path & extra-libspecs]
+  (let [st           (parse-file path)
+        ns           (get-ns-form st)
+        require-index (get-require-index ns)
+        libspecs     (apply merge-libspecs-in st extra-libspecs)
+        new-requires (conj libspecs :require)]
+    (if require-index
+      (m/replace-nth require-index new-requires ns)
+      (concat ns (list new-requires)))))
+
+(defn -main
+  [filepath & libspecs]
+  (doto (apply update-ns-requires filepath libspecs)
+    prn))
+
+(when (= *file* (System/getProperty "babashka.file"))
+  (when-let [[filepath & libspecs] *command-line-args*]
+    (apply -main filepath (map edn/read-string libspecs))))

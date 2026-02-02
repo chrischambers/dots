@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -e
+
+main() {
+  name="$1"
+  if [ -z "$1" ]; then
+    echo "Error: No project-name argument supplied."
+    exit 1
+  else
+    shift
+    nix run nixpkgs#clojure -- -T:project/create :name "$name" "$@" && \
+    cd "$name" && nix flake init -t github:chrischambers/nix#clojure && direnv allow
+  fi
+}
+
+main "$@"
