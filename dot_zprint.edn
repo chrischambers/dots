@@ -20,9 +20,12 @@
  :fn-map         {">def"           "def"
                   ">defn"          "defn"
                   ">defn-"         "defn-"
+
+                  "checking"       "testing"
                   "gen-let"        "let"
                   "letfn-memoized" "letfn"
                   "print-forms"    "let"
+
                   "->"             :none-body
                   "->>"            :none-body
                   "are"            [:guided
