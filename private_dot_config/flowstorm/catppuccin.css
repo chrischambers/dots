@@ -1,13 +1,61 @@
-@font-face {
-  src: url("../fonts/Roboto-Light.ttf");
+* {
+  -fx-theme-base1: #323232;
+  -fx-theme-base2: #3f474f;
+  -fx-theme-base3: #2f353b;
+  -fx-theme-base4: #717175;
+
+  -fx-theme-separator: orange;
+  -fx-theme-dim-text: #919191;
+  -fx-theme-button1-background: #336699;
+  -fx-theme-button1-text: white;
+  -fx-theme-button-hover: #9c0084;
+  -fx-theme-button2-background: #919191;
+  -fx-theme-button2-text: white;
+
+  -fx-theme-selected-main-tools-tab-background: #4743ba;
+  -fx-theme-selected-main-tools-tab-text: white;
+
+  -fx-theme-flow-code-text: #fff;
+  -fx-theme-flow-code-executing-text: #3f474f;
+  -fx-theme-flow-code-executing-background: #00d97e;
+  -fx-theme-flow-code-executing-background-dim: #009c5a;
+  -fx-theme-flow-code-interesting-text: #eb34d5;
+
+  -fx-theme-defmethod-text: #de00c0;
+  -fx-theme-defn-text: #fff;
+  -fx-theme-extend-text: #65ce8a;
+  -fx-theme-links: #de00c0;
+  -fx-theme-breadcrums: #de00c0;
+  -fx-theme-ok: #00ff00;
+  -fx-theme-on: #00d97e;
+  -fx-theme-attention: #ff0000;
+  -fx-theme-warning: orange;
+  -fx-theme-title-label: orange;
+  -fx-theme-field-label: #de00c0;
+  -fx-theme-breakpoint: #ff0000;
+  -fx-theme-breakpoint-continue: #60d61b;
+  -fx-theme-form-highlight: #636363;
+  -fx-theme-list-selection: #788da1;
+  -fx-theme-hl-combos: #555478;
+  -fx-theme-important-combos: #792a6c;
+}
+
+.root {
+  -fx-base: -fx-theme-base1;
+  -fx-background: -fx-theme-base1;
+  -fx-control-inner-background: -fx-theme-base1;
 }
 
 @font-face {
-  src: url("../fonts/Roboto-Medium.ttf");
+  src: url("~/Library/Fonts/SauceCodeProNerdFont-Regular.ttf");
+}
+
+@font-face {
+  src: url("~/Library/Fonts/SauceCodeProNerdFont-Regular.ttf");
 }
 
 .main-pane {
-  -fx-font-family: "Roboto Medium";
+  -fx-font-family: "SauceCodeProNerdFont";
 }
 
 .context-menu {
