@@ -6,4 +6,11 @@
 # Additionally, each config option is also explained in detail
 # on Ghostty's website, at https://ghostty.org/docs/config.
 
-initial-command = zsh ~/bin/tmux-default-session
+# Load default tmux session
+# initial-command = zsh ~/bin/tmux-default-session
+
+# quick terminal:
+window-save-state = never
+quick-terminal-size = 70%
+quick-terminal-animation-duration = 0
+keybind = global:ctrl+grave_accent=toggle_quick_terminal
