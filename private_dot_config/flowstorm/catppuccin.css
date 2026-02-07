@@ -1,43 +1,43 @@
 * {
-  -fx-theme-base1: #323232;
-  -fx-theme-base2: #3f474f;
-  -fx-theme-base3: #2f353b;
-  -fx-theme-base4: #717175;
+  -fx-theme-base1: #1e1e2e;
+  -fx-theme-base2: #1e1e2e;
+  -fx-theme-base3: #1e1e2e;
+  -fx-theme-base4: #1e1e2e;
 
-  -fx-theme-separator: orange;
-  -fx-theme-dim-text: #919191;
-  -fx-theme-button1-background: #336699;
+  -fx-theme-separator: #fe640b;
+  -fx-theme-dim-text: #1e1e2e;
+  -fx-theme-button1-background: #55547b;
   -fx-theme-button1-text: white;
   -fx-theme-button-hover: #9c0084;
-  -fx-theme-button2-background: #919191;
+  -fx-theme-button2-background: #1e1e2e;
   -fx-theme-button2-text: white;
 
-  -fx-theme-selected-main-tools-tab-background: #4743ba;
+  -fx-theme-selected-main-tools-tab-background: #55547b;
   -fx-theme-selected-main-tools-tab-text: white;
 
   -fx-theme-flow-code-text: #fff;
   -fx-theme-flow-code-executing-text: #3f474f;
-  -fx-theme-flow-code-executing-background: #00d97e;
-  -fx-theme-flow-code-executing-background-dim: #009c5a;
-  -fx-theme-flow-code-interesting-text: #eb34d5;
+  -fx-theme-flow-code-executing-background: #55547b;
+  -fx-theme-flow-code-executing-background-dim: #55547b;
+  -fx-theme-flow-code-interesting-text: #ea76cb;
 
-  -fx-theme-defmethod-text: #de00c0;
+  -fx-theme-defmethod-text: #55547b;
   -fx-theme-defn-text: #fff;
-  -fx-theme-extend-text: #65ce8a;
-  -fx-theme-links: #de00c0;
-  -fx-theme-breadcrums: #de00c0;
-  -fx-theme-ok: #00ff00;
-  -fx-theme-on: #00d97e;
-  -fx-theme-attention: #ff0000;
-  -fx-theme-warning: orange;
-  -fx-theme-title-label: orange;
-  -fx-theme-field-label: #de00c0;
-  -fx-theme-breakpoint: #ff0000;
-  -fx-theme-breakpoint-continue: #60d61b;
+  -fx-theme-extend-text: #55547b;
+  -fx-theme-links: #ea76cb;
+  -fx-theme-breadcrums: #55547b;
+  -fx-theme-ok: #55547b;
+  -fx-theme-on: #55547b;
+  -fx-theme-attention: #d20f39;
+  -fx-theme-warning: #fe640b;
+  -fx-theme-title-label: #fe640b;
+  -fx-theme-field-label: #55547b;
+  -fx-theme-breakpoint: #d20f39;
+  -fx-theme-breakpoint-continue: #55547b;
   -fx-theme-form-highlight: #636363;
-  -fx-theme-list-selection: #788da1;
-  -fx-theme-hl-combos: #555478;
-  -fx-theme-important-combos: #792a6c;
+  -fx-theme-list-selection: #9c0084;
+  -fx-theme-hl-combos: #55547b;
+  -fx-theme-important-combos: #55547b;
 }
 
 .root {
@@ -168,7 +168,7 @@
   -fx-background-color: -fx-theme-base1;
 }
 .thread-refresh .ikonli-font-icon {
-  -fx-icon-color: red;
+  -fx-icon-color: #d20f39;
 }
 
 .mirrored {
@@ -240,12 +240,12 @@
 }
 
 .code-token {
-  -fx-font-family: "monospaced";
+  -fx-font-family: "SauceCodeProNerdFont";
   -fx-fill: -fx-theme-flow-code-text;
 }
 
 .monospaced {
-  -fx-font-family: "monospaced";
+  -fx-font-family: "SauceCodeProNerdFont";
 }
 
 .code-token.executing {
@@ -272,7 +272,7 @@
 }
 
 .form-pane {
-  -fx-padding: 10;
+  -fx-padding: 5;
 }
 
 .thread-controls-pane {
@@ -409,7 +409,7 @@
 /*****************/
 
 .timeline-tool .controls-box {
-  -fx-padding: 10;
+  -fx-padding: 5;
 }
 
 /****************/
@@ -426,4 +426,33 @@
 
 .outputs-dw {
   -fx-background-color: -fx-theme-base2;
+}
+
+/**************/
+/* Font Sizes */
+/**************/
+
+.root {
+  -fx-font-size: 15;
+}
+.ikonli-font-icon {
+  -fx-font-size: 13;
+}
+.btn-sm {
+  -fx-font-size: 9;
+}
+.btn-xs {
+  -fx-font-size: 7;
+}
+
+.threads-tab-pane > .tab-header-area {
+  -fx-padding: 5 0 0 130;
+}
+.flows-tab-pane > .tab-header-area {
+  -fx-padding: 5 0 0 300;
+}
+
+.flows-combo {
+  -fx-pref-width: 155;
+  -fx-font-size: 13;
 }
