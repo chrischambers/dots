@@ -46,6 +46,7 @@
   -fx-control-inner-background: -fx-theme-base1;
 }
 
+/*
 @font-face {
   src: url("~/Library/Fonts/SauceCodeProNerdFont-Regular.ttf");
 }
@@ -57,6 +58,7 @@
 .main-pane {
   -fx-font-family: "SauceCodeProNerdFont";
 }
+*/
 
 .context-menu {
   -fx-background-color: -fx-theme-base4;
@@ -239,6 +241,7 @@
   -fx-text-fill: -fx-theme-dim-text;
 }
 
+/*
 .code-token {
   -fx-font-family: "SauceCodeProNerdFont";
   -fx-fill: -fx-theme-flow-code-text;
@@ -247,6 +250,7 @@
 .monospaced {
   -fx-font-family: "SauceCodeProNerdFont";
 }
+*/
 
 .code-token.executing {
   -rtfx-background-color: -fx-theme-flow-code-executing-background;
