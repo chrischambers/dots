@@ -1,0 +1,7 @@
+[mgr]
+ratio = [1, 2, 5]
+
+[preview]
+# Do `yazi --clear-cache` after changing these values:
+max_width = 1200
+max_height = 1200
