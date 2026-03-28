@@ -244,6 +244,13 @@ if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
 fi
 # ----------------------------------------------------------------------
 
+_tl() {
+  local -a profiles
+  profiles=(${HOME}/.config/tmuxp/*.(yml|yaml)(N:t:r))
+  compadd -- $profiles
+}
+compdef _tl tl
+
 if [[ -r "$HOME/.zshrc.local" ]]; then
   source "$HOME/.zshrc.local"
 fi
